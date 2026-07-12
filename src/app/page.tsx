@@ -111,7 +111,7 @@ export default function Home() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: aboutSection,
-          start: "top 70%",
+          start: "top 60%",
         }
       });
       
@@ -119,10 +119,15 @@ export default function Home() {
         { y: 150, opacity: 0, rotateZ: 5 }, 
         { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out" }
       )
-      .fromTo(".about-text", 
-        { x: 50, opacity: 0 }, 
-        { x: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+      .fromTo(".about-box",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
         "-=0.8"
+      )
+      .fromTo(".about-text", 
+        { x: 100, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "expo.out" },
+        "-=0.5"
       );
     }
 
@@ -383,7 +388,7 @@ export default function Home() {
                 <h2 className="about-title text-[60px] md:text-[80px] text-hollow leading-none origin-bottom-left">
                   WHO WE <br /> ARE
                 </h2>
-                <div className="w-12 h-12 bg-accent mt-12 hidden lg:block" />
+                <div className="about-box w-12 h-12 bg-accent mt-12 hidden lg:block origin-left" />
               </div>
             </div>
             
@@ -405,11 +410,15 @@ export default function Home() {
                   desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." 
                 }
               ].map((item, i) => (
-                <div key={i} className="about-text flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 p-10 lg:p-16 border-b border-muted hover:bg-[#0f0f0f] transition-colors duration-300">
-                  <span className="font-heading text-xl text-accent w-24 shrink-0">{item.num}</span>
-                  <div className="flex flex-col gap-6">
-                    <h3 className="text-3xl lg:text-4xl font-black text-text-base tracking-tight uppercase">{item.title}</h3>
-                    <p className="text-body text-lg leading-relaxed max-w-2xl">
+                <div key={i} className="about-text group flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 p-10 lg:p-16 border-b border-muted transition-colors duration-500 relative overflow-hidden cursor-pointer">
+                  {/* Hover Background Sweep */}
+                  <div className="absolute left-0 top-0 w-0 h-full bg-[#0f0f0f] group-hover:w-full transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] z-0" />
+                  
+                  <span className="font-heading text-xl text-accent w-24 shrink-0 transform group-hover:translate-x-4 transition-transform duration-500 ease-out z-10">{item.num}</span>
+                  
+                  <div className="flex flex-col gap-6 z-10">
+                    <h3 className="text-3xl lg:text-4xl font-black text-text-base tracking-tight uppercase transform group-hover:translate-x-4 transition-transform duration-500 delay-75 ease-out">{item.title}</h3>
+                    <p className="text-body text-lg leading-relaxed max-w-2xl transform group-hover:translate-x-4 transition-transform duration-500 delay-150 ease-out">
                       {item.desc}
                     </p>
                   </div>
