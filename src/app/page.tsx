@@ -196,7 +196,9 @@ export default function Home() {
   }, []);
 
   const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    const subject = encodeURIComponent("Booking a Strategy Call");
+    const body = encodeURIComponent("Hi Flowmatic Team,\n\nI'd like to book a strategy call to discuss automating my business systems.\n\nMy website/business is: ");
+    window.location.href = `mailto:hello@flowmatic.io?subject=${subject}&body=${body}`;
   };
 
   return (

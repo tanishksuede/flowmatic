@@ -57,9 +57,9 @@ export default async function BlueprintPage({ params }: { params: Promise<{ id: 
               <p className="text-body text-lg mb-8">
                 Ready to deploy a similar system and reclaim your hours?
               </p>
-              <Link href="/#contact" className="btn-outline interactive inline-block">
+              <a href="mailto:hello@flowmatic.io?subject=Booking%20a%20Strategy%20Call&body=Hi%20Flowmatic%20Team%2C%0D%0A%0D%0AI'd%20like%20to%20book%20a%20strategy%20call%20to%20discuss%20automating%20my%20business%20systems.%0D%0A%0D%0AMy%20website%2Fbusiness%20is%3A%20" className="btn-outline interactive inline-block text-center">
                 BUILD A SIMILAR SYSTEM
-              </Link>
+              </a>
             </div>
           </div>
 
