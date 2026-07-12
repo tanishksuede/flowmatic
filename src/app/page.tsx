@@ -105,6 +105,37 @@ export default function Home() {
       });
     }
 
+    // ANIMATION 8: ABOUT SECTION
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: "top 70%",
+        }
+      });
+      
+      tl.fromTo(".about-title", 
+        { y: 150, opacity: 0, rotateZ: 5 }, 
+        { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out" }
+      )
+      .fromTo(".about-line", 
+        { scaleY: 0 }, 
+        { scaleY: 1, transformOrigin: "top", duration: 1.5, ease: "power3.inOut" },
+        "-=0.8"
+      )
+      .fromTo(".about-line-h", 
+        { scaleX: 0 }, 
+        { scaleX: 1, transformOrigin: "left", duration: 1.5, ease: "power3.inOut" },
+        "-=1.5"
+      )
+      .fromTo(".about-text", 
+        { x: 50, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+        "-=1"
+      );
+    }
+
     // ANIMATION 7: CASE STUDIES HORIZONTAL SCROLL
     if (caseStudiesRef.current && caseStudiesWrapperRef.current) {
       const wrapper = caseStudiesWrapperRef.current;
@@ -355,35 +386,36 @@ export default function Home() {
         {/* ==========================================
             8. ABOUT US
         ========================================== */}
-        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A]">
-          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-20">
+        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden">
+          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-20 relative">
             <div className="lg:w-1/3">
-              <h2 className="text-[60px] md:text-[80px] text-hollow leading-none sticky top-32">
-                WHO WE <br /> ARE
-              </h2>
+              <div className="sticky top-32 overflow-hidden py-4">
+                <h2 className="about-title text-[60px] md:text-[80px] text-hollow leading-none origin-bottom-left">
+                  WHO WE <br /> ARE
+                </h2>
+              </div>
             </div>
             
-            <div className="lg:w-2/3 flex flex-col gap-12 border-l border-t lg:border-t-0 border-muted pt-12 lg:pt-0 pl-0 lg:pl-20 py-8">
-              <div className="reveal-item">
-                <h3 className="text-3xl font-black mb-6 text-text-base">Engineered for Scale.</h3>
-                <p className="text-body text-lg leading-relaxed max-w-2xl">
-                  Flowmatic is a technical, builder-first automation agency based out of Indore, India. We don't sell generic advice, empty consulting hours, or fluffy marketing strategies.
-                </p>
-              </div>
-
-              <div className="reveal-item">
-                <h3 className="text-3xl font-black mb-6 text-text-base">Our Philosophy</h3>
-                <p className="text-body text-lg leading-relaxed max-w-2xl">
-                  We are engineers, system architects, and growth strategists. Our team focuses strictly on what works: deploying raw, uncompromised automation that directly impacts your bottom line. We learn by doing, and we only deploy battle-tested pipelines.
-                </p>
-              </div>
-
-              <div className="reveal-item">
-                <h3 className="text-3xl font-black mb-6 text-text-base">Why We Do This</h3>
-                <p className="text-body text-lg leading-relaxed max-w-2xl">
-                  We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals.
-                </p>
-              </div>
+            <div className="lg:w-2/3 flex flex-col gap-16 relative pt-12 lg:pt-0 pl-0 lg:pl-20 py-8">
+              {/* Custom animated borders */}
+              <div className="about-line absolute left-0 top-0 w-[1px] h-full bg-muted hidden lg:block" />
+              <div className="about-line-h absolute left-0 top-0 w-full h-[1px] bg-muted lg:hidden" />
+              
+              {[
+                { title: "Engineered for Scale.", desc: "Flowmatic is a technical, builder-first automation agency based out of Indore, India. We don't sell generic advice, empty consulting hours, or fluffy marketing strategies." },
+                { title: "Our Philosophy", desc: "We are engineers, system architects, and growth strategists. Our team focuses strictly on what works: deploying raw, uncompromised automation that directly impacts your bottom line. We learn by doing, and we only deploy battle-tested pipelines." },
+                { title: "Why We Do This", desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." }
+              ].map((item, i) => (
+                <div key={i} className="about-text flex flex-col gap-6 opacity-0">
+                  <div className="flex items-center gap-6">
+                    <div className="w-12 h-[1px] bg-accent" />
+                    <h3 className="text-3xl font-black text-text-base tracking-tight">{item.title}</h3>
+                  </div>
+                  <p className="text-body text-lg leading-relaxed max-w-2xl pl-[72px]">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
