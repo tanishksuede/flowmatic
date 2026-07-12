@@ -36,6 +36,9 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
   const bgNoiseRef = useRef<HTMLDivElement>(null);
   const heroHollowRef = useRef<HTMLHeadingElement>(null);
+  const shape1Ref = useRef<HTMLDivElement>(null);
+  const shape2Ref = useRef<HTMLDivElement>(null);
+  const shape3Ref = useRef<HTMLDivElement>(null);
   const caseStudiesRef = useRef<HTMLElement>(null);
   const caseStudiesWrapperRef = useRef<HTMLDivElement>(null);
   
@@ -80,6 +83,25 @@ export default function Home() {
           end: "bottom top",
           scrub: 1,
         }
+      });
+      
+      gsap.to(shape1Ref.current, {
+        y: -150,
+        rotate: 5,
+        ease: "none",
+        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
+      });
+      gsap.to(shape2Ref.current, {
+        y: -250,
+        x: -20,
+        ease: "none",
+        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1.5 }
+      });
+      gsap.to(shape3Ref.current, {
+        y: -80,
+        rotate: -5,
+        ease: "none",
+        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 0.5 }
       });
     }
 
@@ -154,30 +176,30 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="hidden lg:flex relative w-[400px] h-[400px] items-center justify-center pointer-events-none z-10 opacity-80">
-              <svg width="400" height="400" viewBox="0 0 400 400" className="absolute inset-0">
-                {/* Crosshairs */}
-                <path d="M200 0 L200 400 M0 200 L400 200" stroke="#2563EB" strokeWidth="1" opacity="0.3" />
-                
-                {/* Outer Dashed Orbit */}
-                <circle cx="200" cy="200" r="180" fill="none" stroke="#2563EB" strokeWidth="1" strokeDasharray="4 8" className="animate-[spin_30s_linear_infinite] origin-center" />
-                
-                {/* Static Inner Ring */}
-                <circle cx="200" cy="200" r="120" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.5" />
-                
-                {/* Spinning Squares */}
-                <rect x="110" y="110" width="180" height="180" fill="none" stroke="#2563EB" strokeWidth="1" className="animate-[spin_15s_linear_infinite_reverse] origin-center" />
-                <rect x="140" y="140" width="120" height="120" fill="none" stroke="#2563EB" strokeWidth="2" className="animate-[spin_20s_linear_infinite] origin-center" />
-                
-                {/* Pulsing Core */}
-                <circle cx="200" cy="200" r="6" fill="#2563EB" className="animate-pulse" />
-                
-                {/* Orbiting Data Nodes */}
-                <g className="animate-[spin_10s_linear_infinite] origin-center">
-                  <circle cx="200" cy="80" r="4" fill="#2563EB" />
-                  <circle cx="200" cy="320" r="4" fill="#2563EB" />
-                </g>
-              </svg>
+            <div className="hidden lg:block relative w-[500px] h-[500px] pointer-events-none z-10">
+              {/* Shape 1 */}
+              <div ref={shape1Ref} className="absolute top-[10%] right-[15%] w-[200px] h-[240px] border border-accent bg-[#0A0A0A] p-5 flex flex-col justify-between shadow-2xl">
+                <div className="w-10 h-10 bg-accent" />
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-text-base/40 uppercase tracking-widest">Trigger</span>
+                  <span className="font-heading text-lg text-text-base">WEBHOOK_IN</span>
+                </div>
+              </div>
+              
+              {/* Shape 2 */}
+              <div ref={shape2Ref} className="absolute top-[40%] left-[5%] w-[260px] h-[160px] border border-muted bg-[#050505] p-5 flex flex-col justify-between z-10 shadow-[8px_8px_0_#2563EB]">
+                <div className="flex justify-between items-start w-full">
+                  <span className="text-[10px] text-text-base/40 uppercase tracking-widest">Processing</span>
+                  <div className="w-2 h-2 bg-accent animate-pulse" />
+                </div>
+                <span className="font-heading text-4xl text-text-base text-hollow tracking-tighter">LLM_CORE</span>
+              </div>
+              
+              {/* Shape 3 */}
+              <div ref={shape3Ref} className="absolute bottom-[15%] right-[25%] px-6 py-3 bg-text-base text-[#050505] font-bold text-sm uppercase tracking-widest flex items-center gap-3">
+                <div className="w-2 h-2 bg-[#050505] animate-pulse" />
+                SYSTEM.ACTIVE
+              </div>
             </div>
           </div>
         </section>
