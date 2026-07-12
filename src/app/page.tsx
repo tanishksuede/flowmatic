@@ -154,10 +154,30 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="hidden lg:flex relative w-[400px] h-[400px] items-center justify-center pointer-events-none z-10">
-              <div className="absolute w-[300px] h-[300px] border border-accent rounded-full animate-[spin_20s_linear_infinite]" />
-              <div className="absolute w-[200px] h-[200px] border border-accent rounded-sm animate-[spin_15s_linear_infinite_reverse]" />
-              <div className="absolute w-[100px] h-[100px] border border-accent rounded-full animate-[spin_10s_linear_infinite]" />
+            <div className="hidden lg:flex relative w-[400px] h-[400px] items-center justify-center pointer-events-none z-10 opacity-80">
+              <svg width="400" height="400" viewBox="0 0 400 400" className="absolute inset-0">
+                {/* Crosshairs */}
+                <path d="M200 0 L200 400 M0 200 L400 200" stroke="#2563EB" strokeWidth="1" opacity="0.3" />
+                
+                {/* Outer Dashed Orbit */}
+                <circle cx="200" cy="200" r="180" fill="none" stroke="#2563EB" strokeWidth="1" strokeDasharray="4 8" className="animate-[spin_30s_linear_infinite] origin-center" />
+                
+                {/* Static Inner Ring */}
+                <circle cx="200" cy="200" r="120" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.5" />
+                
+                {/* Spinning Squares */}
+                <rect x="110" y="110" width="180" height="180" fill="none" stroke="#2563EB" strokeWidth="1" className="animate-[spin_15s_linear_infinite_reverse] origin-center" />
+                <rect x="140" y="140" width="120" height="120" fill="none" stroke="#2563EB" strokeWidth="2" className="animate-[spin_20s_linear_infinite] origin-center" />
+                
+                {/* Pulsing Core */}
+                <circle cx="200" cy="200" r="6" fill="#2563EB" className="animate-pulse" />
+                
+                {/* Orbiting Data Nodes */}
+                <g className="animate-[spin_10s_linear_infinite] origin-center">
+                  <circle cx="200" cy="80" r="4" fill="#2563EB" />
+                  <circle cx="200" cy="320" r="4" fill="#2563EB" />
+                </g>
+              </svg>
             </div>
           </div>
         </section>
