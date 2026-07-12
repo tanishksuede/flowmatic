@@ -114,26 +114,22 @@ export default function Home() {
         { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out", scrollTrigger: { trigger: aboutSection, start: "top 70%" } }
       );
       
-      // 2. Box entry
-      gsap.fromTo(".about-box",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "power3.inOut", scrollTrigger: { trigger: aboutSection, start: "top 70%" } }
+      // 2. Center Pointer Animation
+      gsap.fromTo(".about-pointer", 
+        { top: "0%" },
+        { 
+          top: "100%", 
+          ease: "none",
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          }
+        }
       );
 
-      // 3. Parallax scroll effect for the box
-      gsap.to(".about-box", {
-        rotateZ: 180,
-        y: 150,
-        ease: "none",
-        scrollTrigger: {
-          trigger: aboutSection,
-          start: "top center",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
-
-      // 4. Scrubbed entry for the text rows
+      // 3. Scrubbed entry for the text rows
       const aboutTexts = gsap.utils.toArray(".about-text");
       aboutTexts.forEach((text: any) => {
         gsap.fromTo(text, 
@@ -144,8 +140,8 @@ export default function Home() {
             ease: "none",
             scrollTrigger: {
               trigger: text,
-              start: "top 95%",
-              end: "top 70%",
+              start: "top 65%",
+              end: "top 45%",
               scrub: 1,
             }
           }
@@ -403,18 +399,25 @@ export default function Home() {
         {/* ==========================================
             8. ABOUT US
         ========================================== */}
-        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted">
+        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted relative">
           <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-0 relative">
-            <div className="lg:w-1/3 border-r border-muted pr-10">
-              <div className="sticky top-32 overflow-hidden py-4">
+            
+            {/* Left Column */}
+            <div className="lg:w-1/3 pr-10 lg:pr-24">
+              <div className="sticky top-1/3 overflow-hidden py-4">
                 <h2 className="about-title text-[60px] md:text-[80px] text-hollow leading-none origin-bottom-left">
                   WHO WE <br /> ARE
                 </h2>
-                <div className="about-box w-12 h-12 bg-accent mt-12 hidden lg:block origin-left" />
               </div>
             </div>
             
-            <div className="lg:w-2/3 flex flex-col relative border-t lg:border-t-0 border-muted">
+            {/* Center Timeline Track (Desktop Only) */}
+            <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-[1px] bg-muted transform -translate-x-1/2 z-0">
+              <div className="about-pointer absolute left-1/2 transform -translate-x-1/2 w-[3px] h-32 bg-accent shadow-[0_0_20px_#2563EB] z-10" />
+            </div>
+
+            {/* Right Column */}
+            <div className="lg:w-2/3 flex flex-col relative border-t lg:border-t-0 border-muted pl-0 lg:pl-16">
               {[
                 { 
                   num: "SYS.01",
@@ -432,9 +435,9 @@ export default function Home() {
                   desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." 
                 }
               ].map((item, i) => (
-                <div key={i} className="about-text group flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 p-10 lg:p-16 border-b border-muted transition-colors duration-500 relative overflow-hidden cursor-pointer">
+                <div key={i} className="about-text group flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 py-16 border-b border-muted transition-colors duration-500 relative overflow-hidden cursor-pointer">
                   {/* Hover Background Sweep */}
-                  <div className="absolute left-0 top-0 w-0 h-full bg-[#0f0f0f] group-hover:w-full transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] z-0" />
+                  <div className="absolute left-0 top-0 w-0 h-full bg-[#0f0f0f] group-hover:w-[120%] -translate-x-[10%] transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] z-0" />
                   
                   <span className="font-heading text-xl text-accent w-24 shrink-0 transform group-hover:translate-x-4 transition-transform duration-500 ease-out z-10">{item.num}</span>
                   
