@@ -5,31 +5,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CASE_STUDIES } from "../data/caseStudies";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const tools = ["n8n", "Supabase", "Twilio", "Groq", "Google Sheets", "Claude", "Apify", "OpenAI"];
-
-const CASE_STUDIES = [
-  { 
-    ind: "Marketing Agency (US)", 
-    res: "20hrs saved per week", 
-    title: "Automated client reporting pipeline pulling Meta/Google Ads data into plain-English emails.",
-    architecture: "We connected their advertising platforms directly to a central dashboard. Every Monday, the system automatically pulls the latest campaign data, uses AI to write a clear, easy-to-read summary of the results, and sends beautifully formatted update emails to all their clients.\n\nKey Features:\n• Automated Data Collection\n• AI Performance Summaries\n• Zero-Touch Email Delivery"
-  },
-  { 
-    ind: "B2B SaaS (UK)", 
-    res: "45% higher reply rate", 
-    title: "Hyper-personalized cold outreach sequence using intent-based scraping.",
-    architecture: "We built a system that actively monitors LinkedIn and Twitter for people asking for software recommendations. When it finds a strong lead, AI reads their recent posts to write a highly personalized opening message. The lead is then automatically added to an email outreach campaign.\n\nKey Features:\n• Intent-Based Lead Finding\n• AI Personalized Messaging\n• Hands-Free Outreach"
-  },
-  { 
-    ind: "D2C E-commerce (AU)", 
-    res: "Zero manual data entry", 
-    title: "Unified CRM pipeline automation executing flawlessly in the background.",
-    architecture: "We linked their Shopify store directly to their CRM. When someone abandons a high-value cart, the system checks if they are a repeat VIP customer. If they are, it instantly messages a sales rep to call them. If they are a standard customer, it automatically sends them a sequence of recovery text messages.\n\nKey Features:\n• Smart Customer Routing\n• VIP Sales Alerts\n• Automated SMS Recovery"
-  }
-];
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,8 +23,6 @@ export default function Home() {
   const textRightRef = useRef<HTMLSpanElement>(null);
   const caseStudiesRef = useRef<HTMLElement>(null);
   const caseStudiesWrapperRef = useRef<HTMLDivElement>(null);
-  
-  const [activeModal, setActiveModal] = useState<number | null>(null);
 
   useEffect(() => {
     // ANIMATION 1: BATCH REVEALS
@@ -519,58 +497,6 @@ export default function Home() {
         </section>
       </main>
       <Footer />
-
-      {/* ==========================================
-          CASE STUDY MODAL OVERLAY
-      ========================================== */}
-      {activeModal !== null && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-bg-base/90 backdrop-blur-md p-0 md:p-8">
-          <div className="bg-[#050505] border-y md:border border-muted w-full max-w-6xl h-full max-h-[100dvh] md:max-h-[85vh] flex flex-col relative shadow-[0_0_50px_rgba(37,99,235,0.05)]">
-            {/* Header */}
-            <div className="flex justify-between items-center p-6 md:p-8 border-b border-muted">
-              <span className="font-heading text-xl md:text-2xl font-black uppercase text-text-base">
-                SYSTEM BLUEPRINT
-              </span>
-              <button 
-                onClick={() => setActiveModal(null)}
-                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-muted hover:bg-muted transition-colors interactive"
-              >
-                <span className="text-xl">✕</span>
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-24">
-              
-              {/* Left Column: Title & Impact */}
-              <div className="lg:w-1/2 flex flex-col">
-                <span className="text-accent font-bold tracking-widest text-sm mb-4 uppercase">
-                  {CASE_STUDIES[activeModal].ind}
-                </span>
-                <h2 className="text-3xl md:text-5xl font-black text-text-base leading-tight mb-8 lg:mb-auto">
-                  {CASE_STUDIES[activeModal].title}
-                </h2>
-                
-                <div className="mt-8 pt-8 border-t border-muted">
-                  <span className="section-label text-text-base mb-4 block">QUANTIFIABLE IMPACT</span>
-                  <div className="text-4xl md:text-6xl font-black text-accent tracking-tighter">
-                    {CASE_STUDIES[activeModal].res}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Workflow */}
-              <div className="lg:w-1/2 flex flex-col">
-                <h3 className="section-label text-text-base mb-6">WORKFLOW & FEATURES</h3>
-                <div className="text-body text-lg leading-relaxed whitespace-pre-wrap">
-                  {CASE_STUDIES[activeModal].architecture}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
