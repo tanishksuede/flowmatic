@@ -119,20 +119,10 @@ export default function Home() {
         { y: 150, opacity: 0, rotateZ: 5 }, 
         { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out" }
       )
-      .fromTo(".about-line", 
-        { scaleY: 0 }, 
-        { scaleY: 1, transformOrigin: "top", duration: 1.5, ease: "power3.inOut" },
-        "-=0.8"
-      )
-      .fromTo(".about-line-h", 
-        { scaleX: 0 }, 
-        { scaleX: 1, transformOrigin: "left", duration: 1.5, ease: "power3.inOut" },
-        "-=1.5"
-      )
       .fromTo(".about-text", 
         { x: 50, opacity: 0 }, 
         { x: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
-        "-=1"
+        "-=0.8"
       );
     }
 
@@ -386,34 +376,43 @@ export default function Home() {
         {/* ==========================================
             8. ABOUT US
         ========================================== */}
-        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden">
-          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-20 relative">
-            <div className="lg:w-1/3">
+        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted">
+          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-0 relative">
+            <div className="lg:w-1/3 border-r border-muted pr-10">
               <div className="sticky top-32 overflow-hidden py-4">
                 <h2 className="about-title text-[60px] md:text-[80px] text-hollow leading-none origin-bottom-left">
                   WHO WE <br /> ARE
                 </h2>
+                <div className="w-12 h-12 bg-accent mt-12 hidden lg:block" />
               </div>
             </div>
             
-            <div className="lg:w-2/3 flex flex-col gap-16 relative pt-12 lg:pt-0 pl-0 lg:pl-20 py-8">
-              {/* Custom animated borders */}
-              <div className="about-line absolute left-0 top-0 w-[1px] h-full bg-muted hidden lg:block" />
-              <div className="about-line-h absolute left-0 top-0 w-full h-[1px] bg-muted lg:hidden" />
-              
+            <div className="lg:w-2/3 flex flex-col relative border-t lg:border-t-0 border-muted">
               {[
-                { title: "Engineered for Scale.", desc: "Flowmatic is a technical, builder-first automation agency based out of Indore, India. We don't sell generic advice, empty consulting hours, or fluffy marketing strategies." },
-                { title: "Our Philosophy", desc: "We are engineers, system architects, and growth strategists. Our team focuses strictly on what works: deploying raw, uncompromised automation that directly impacts your bottom line. We learn by doing, and we only deploy battle-tested pipelines." },
-                { title: "Why We Do This", desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." }
+                { 
+                  num: "SYS.01",
+                  title: "Engineered for Scale", 
+                  desc: "Flowmatic is a technical, builder-first automation agency based out of Indore, India. We don't sell generic advice, empty consulting hours, or fluffy marketing strategies." 
+                },
+                { 
+                  num: "SYS.02",
+                  title: "Our Philosophy", 
+                  desc: "We are engineers, system architects, and growth strategists. Our team focuses strictly on what works: deploying raw, uncompromised automation that directly impacts your bottom line. We learn by doing, and we only deploy battle-tested pipelines." 
+                },
+                { 
+                  num: "SYS.03",
+                  title: "Why We Do This", 
+                  desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." 
+                }
               ].map((item, i) => (
-                <div key={i} className="about-text flex flex-col gap-6 opacity-0">
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-[1px] bg-accent" />
-                    <h3 className="text-3xl font-black text-text-base tracking-tight">{item.title}</h3>
+                <div key={i} className="about-text flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 p-10 lg:p-16 border-b border-muted hover:bg-[#0f0f0f] transition-colors duration-300">
+                  <span className="font-heading text-xl text-accent w-24 shrink-0">{item.num}</span>
+                  <div className="flex flex-col gap-6">
+                    <h3 className="text-3xl lg:text-4xl font-black text-text-base tracking-tight uppercase">{item.title}</h3>
+                    <p className="text-body text-lg leading-relaxed max-w-2xl">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p className="text-body text-lg leading-relaxed max-w-2xl pl-[72px]">
-                    {item.desc}
-                  </p>
                 </div>
               ))}
             </div>
