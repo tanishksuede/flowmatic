@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CASE_STUDIES } from "../data/caseStudies";
@@ -403,11 +404,12 @@ export default function Home() {
                 <div>
                   <h3 className="text-[50px] leading-none mb-6 group-hover:text-accent transition-colors duration-300">{cs.res}</h3>
                   <p className="text-body mb-8 text-lg">{cs.title}</p>
-                  <button 
-                    className="uppercase font-bold tracking-widest text-sm border-b border-text-base pb-1 interactive hover:text-accent transition-colors duration-300"
+                  <Link 
+                    href={`/blueprint/${i}`}
+                    className="uppercase font-bold tracking-widest text-sm border-b border-text-base pb-1 interactive hover:text-accent transition-colors duration-300 w-fit"
                   >
                     View Architecture
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
