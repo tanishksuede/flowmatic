@@ -108,27 +108,49 @@ export default function Home() {
     // ANIMATION 8: ABOUT SECTION
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
-      const tl = gsap.timeline({
+      // 1. Title entry
+      gsap.fromTo(".about-title", 
+        { y: 150, opacity: 0, rotateZ: 5 }, 
+        { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out", scrollTrigger: { trigger: aboutSection, start: "top 70%" } }
+      );
+      
+      // 2. Box entry
+      gsap.fromTo(".about-box",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "power3.inOut", scrollTrigger: { trigger: aboutSection, start: "top 70%" } }
+      );
+
+      // 3. Parallax scroll effect for the box
+      gsap.to(".about-box", {
+        rotateZ: 180,
+        y: 150,
+        ease: "none",
         scrollTrigger: {
           trigger: aboutSection,
-          start: "top 60%",
+          start: "top center",
+          end: "bottom top",
+          scrub: 1,
         }
       });
-      
-      tl.fromTo(".about-title", 
-        { y: 150, opacity: 0, rotateZ: 5 }, 
-        { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out" }
-      )
-      .fromTo(".about-box",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-        "-=0.8"
-      )
-      .fromTo(".about-text", 
-        { x: 100, opacity: 0 }, 
-        { x: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "expo.out" },
-        "-=0.5"
-      );
+
+      // 4. Scrubbed entry for the text rows
+      const aboutTexts = gsap.utils.toArray(".about-text");
+      aboutTexts.forEach((text: any) => {
+        gsap.fromTo(text, 
+          { x: 100, opacity: 0 }, 
+          { 
+            x: 0, 
+            opacity: 1, 
+            ease: "none",
+            scrollTrigger: {
+              trigger: text,
+              start: "top 95%",
+              end: "top 70%",
+              scrub: 1,
+            }
+          }
+        );
+      });
     }
 
     // ANIMATION 7: CASE STUDIES HORIZONTAL SCROLL
