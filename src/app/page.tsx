@@ -495,41 +495,55 @@ export default function Home() {
           </div>
         </section>
       </main>
-
       <Footer />
 
       {/* ==========================================
           CASE STUDY MODAL OVERLAY
       ========================================== */}
       {activeModal !== null && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-10 bg-bg-base/95 backdrop-blur-xl animate-in fade-in duration-300">
-          <div className="max-w-3xl w-full bg-[#050505] border border-accent p-12 relative">
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="absolute top-8 right-8 text-body hover:text-accent font-bold uppercase tracking-widest text-sm interactive transition-colors"
-            >
-              [ CLOSE ]
-            </button>
-            <span className="text-accent font-heading text-2xl mb-4 block">ARCHITECTURE LOG: {CASE_STUDIES[activeModal].ind}</span>
-            <h2 className="text-4xl md:text-5xl font-black mb-8 leading-tight">{CASE_STUDIES[activeModal].title}</h2>
-            
-            <div className="h-[1px] w-full bg-muted mb-8" />
-            
-            <h3 className="section-label text-text-base mb-4">WORKFLOW & FEATURES</h3>
-            <p className="text-body text-lg leading-relaxed whitespace-pre-wrap">
-              {CASE_STUDIES[activeModal].architecture}
-            </p>
-            
-            <div className="mt-12">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-bg-base/90 backdrop-blur-md p-0 md:p-8">
+          <div className="bg-[#050505] border-y md:border border-muted w-full max-w-6xl h-full max-h-[100dvh] md:max-h-[85vh] flex flex-col relative shadow-[0_0_50px_rgba(37,99,235,0.05)]">
+            {/* Header */}
+            <div className="flex justify-between items-center p-6 md:p-8 border-b border-muted">
+              <span className="font-heading text-xl md:text-2xl font-black uppercase text-text-base">
+                SYSTEM BLUEPRINT
+              </span>
               <button 
-                onClick={() => {
-                  setActiveModal(null);
-                  scrollToContact();
-                }}
-                className="btn-outline interactive w-full md:w-auto"
+                onClick={() => setActiveModal(null)}
+                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-muted hover:bg-muted transition-colors interactive"
               >
-                BUILD A SIMILAR SYSTEM
+                <span className="text-xl">✕</span>
               </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-24">
+              
+              {/* Left Column: Title & Impact */}
+              <div className="lg:w-1/2 flex flex-col">
+                <span className="text-accent font-bold tracking-widest text-sm mb-4 uppercase">
+                  {CASE_STUDIES[activeModal].ind}
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-text-base leading-tight mb-8 lg:mb-auto">
+                  {CASE_STUDIES[activeModal].title}
+                </h2>
+                
+                <div className="mt-8 pt-8 border-t border-muted">
+                  <span className="section-label text-text-base mb-4 block">QUANTIFIABLE IMPACT</span>
+                  <div className="text-4xl md:text-6xl font-black text-accent tracking-tighter">
+                    {CASE_STUDIES[activeModal].res}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Workflow */}
+              <div className="lg:w-1/2 flex flex-col">
+                <h3 className="section-label text-text-base mb-6">WORKFLOW & FEATURES</h3>
+                <div className="text-body text-lg leading-relaxed whitespace-pre-wrap">
+                  {CASE_STUDIES[activeModal].architecture}
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
