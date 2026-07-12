@@ -195,6 +195,22 @@ export default function Home() {
       });
     }
 
+    // ANIMATION 9: GLOBAL WRENCH
+    const wrenchTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+      }
+    });
+
+    wrenchTl
+      .to(".global-wrench", { x: "-70vw", y: "20vh", rotateZ: -90, scale: 1.5, duration: 1 })
+      .to(".global-wrench", { x: "-10vw", y: "40vh", rotateZ: 180, scale: 0.8, duration: 1 })
+      .to(".global-wrench", { x: "-40vw", y: "60vh", rotateZ: 360, scale: 4, opacity: 0.1, duration: 1 })
+      .to(".global-wrench", { x: "-40vw", y: "80vh", rotateZ: 720, scale: 1, opacity: 0.5, duration: 1 });
+
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
@@ -206,6 +222,13 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="relative">
+      {/* GLOBAL WRENCH */}
+      <div className="global-wrench fixed top-32 right-10 md:right-20 z-[5] pointer-events-none text-accent/30 hidden md:block">
+        <svg className="w-24 h-24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>
+
       <Navbar />
 
       <main className="w-full">
