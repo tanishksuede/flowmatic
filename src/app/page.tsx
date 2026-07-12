@@ -152,9 +152,10 @@ export default function Home() {
       const wrapper = caseStudiesWrapperRef.current;
       
       const getScrollAmount = () => {
-        const wrapperWidth = wrapper.scrollWidth;
-        // Scroll exactly enough to show the end of the wrapper, plus 10vw padding
-        return -(wrapperWidth - window.innerWidth + window.innerWidth * 0.1); 
+        const totalWidth = wrapper.scrollWidth + wrapper.offsetLeft;
+        // Provide a massive buffer (half the screen width) to guarantee the 3rd card is fully visible
+        const padding = window.innerWidth * 0.5;
+        return -(totalWidth - window.innerWidth + padding);
       };
 
       const tween = gsap.to(wrapper, {
