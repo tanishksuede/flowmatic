@@ -152,9 +152,8 @@ export default function Home() {
       
       const getScrollAmount = () => {
         const wrapperWidth = wrapper.scrollWidth;
-        // The side text is 400px, window width minus 400 is the visible area for cards.
-        // We add some extra padding to ensure the 3rd card fully clears the right edge.
-        return -(wrapperWidth - (window.innerWidth - 450) + 200); 
+        // Scroll exactly enough to show the end of the wrapper, plus 10vw padding
+        return -(wrapperWidth - window.innerWidth + window.innerWidth * 0.1); 
       };
 
       const tween = gsap.to(wrapper, {
@@ -220,12 +219,12 @@ export default function Home() {
 
           <div className="max-w-[1440px] mx-auto w-full relative z-10 flex justify-between items-center">
             <div className="flex flex-col">
-              <h1 className="text-[70px] md:text-[130px] leading-[0.85] tracking-tighter w-full max-w-4xl z-20 hero-headline flex flex-col">
+              <h1 className="text-[50px] md:text-[90px] lg:text-[130px] leading-[0.85] tracking-tighter w-full max-w-4xl z-20 hero-headline flex flex-col">
                 <span ref={textLeftRef} className="block w-fit">WE AUTOMATE</span>
                 <span ref={textRightRef} className="block w-fit">THE WORK.</span>
               </h1>
               
-              <h2 ref={heroHollowRef} className="absolute top-[80px] left-[20px] text-[100px] md:text-[180px] leading-[0.8] text-hollow-thick opacity-40 z-10 select-none pointer-events-none">
+              <h2 ref={heroHollowRef} className="absolute top-[60px] left-[10px] md:top-[80px] md:left-[20px] text-[60px] md:text-[120px] lg:text-[180px] leading-[0.8] text-hollow-thick opacity-40 z-10 select-none pointer-events-none">
                 FLOWMATIC
               </h2>
 
@@ -301,11 +300,11 @@ export default function Home() {
         {/* ==========================================
             4. SERVICES
         ========================================== */}
-        <section id="services" className="w-full py-[180px] px-10">
-          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-20">
+        <section id="services" className="w-full py-[120px] md:py-[180px] px-6 md:px-10">
+          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-12 md:gap-20">
             <div className="lg:w-1/3">
-              <h2 className="text-[60px] md:text-[80px] text-hollow leading-none sticky top-32">
-                WHAT <br /> WE BUILD
+              <h2 className="text-[50px] md:text-[80px] text-hollow leading-none lg:sticky top-32">
+                WHAT <br className="hidden md:block" /> WE BUILD
               </h2>
             </div>
             
@@ -329,24 +328,24 @@ export default function Home() {
         {/* ==========================================
             5. WHY FLOWMATIC
         ========================================== */}
-        <section className="w-full py-[180px] overflow-hidden bg-[#0A0A0A]">
-          <div className="max-w-[1440px] mx-auto px-10">
-            <h2 className="text-[8vw] leading-none text-hollow whitespace-nowrap reveal-item">
+        <section className="w-full py-[120px] md:py-[180px] overflow-hidden bg-[#0A0A0A]">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+            <h2 className="text-[40px] md:text-[8vw] leading-none text-hollow md:whitespace-nowrap reveal-item">
               THE FLOWMATIC EDGE
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16 md:mt-24">
               {[
                 { stat: "48hrs", label: "Average deployment speed" },
                 { stat: "20hrs", label: "Reclaimed per week on reporting" },
                 { stat: "Zero", label: "Technical knowledge required" }
               ].map((item, i) => (
                 <div key={i} className="reveal-item flex flex-col gap-6">
-                  <span className="font-heading text-[80px] text-text-base leading-none">{item.stat}</span>
+                  <span className="font-heading text-[60px] md:text-[80px] text-text-base leading-none">{item.stat}</span>
                   <div className="h-[1px] w-full bg-muted relative">
                     <div className="absolute left-0 top-0 h-full w-1/3 bg-accent" />
                   </div>
-                  <p className="text-body text-lg uppercase tracking-wider">{item.label}</p>
+                  <p className="text-body text-base md:text-lg uppercase tracking-wider">{item.label}</p>
                 </div>
               ))}
             </div>
@@ -356,9 +355,9 @@ export default function Home() {
         {/* ==========================================
             6. PROCESS
         ========================================== */}
-        <section className="w-full py-[180px] px-10">
+        <section className="w-full py-[120px] md:py-[180px] px-6 md:px-10">
           <div className="max-w-[1440px] mx-auto">
-            <h2 className="text-[60px] md:text-[80px] leading-none mb-24 reveal-item">
+            <h2 className="text-[50px] md:text-[80px] leading-none mb-16 md:mb-24 reveal-item">
               HOW IT <span className="text-hollow">WORKS</span>
             </h2>
             
@@ -369,11 +368,11 @@ export default function Home() {
                 { num: "03", title: "Stress Testing & QA" },
                 { num: "04", title: "Deployment & Training" }
               ].map((step) => (
-                <div key={step.num} className="reveal-item group flex items-center gap-12 py-12 border-b border-muted cursor-pointer relative overflow-hidden">
-                  <span className="font-heading text-4xl text-body group-hover:text-accent transition-colors duration-250 ease-[cubic-bezier(0.4,0,0.2,1)]">
+                <div key={step.num} className="reveal-item group flex items-center gap-6 md:gap-12 py-8 md:py-12 border-b border-muted cursor-pointer relative overflow-hidden">
+                  <span className="font-heading text-2xl md:text-4xl text-body group-hover:text-accent transition-colors duration-250 ease-[cubic-bezier(0.4,0,0.2,1)]">
                     {step.num}
                   </span>
-                  <h3 className="text-4xl md:text-6xl transform group-hover:translate-x-[6px] transition-transform duration-250 ease-[cubic-bezier(0.4,0,0.2,1)]">
+                  <h3 className="text-2xl md:text-6xl transform group-hover:translate-x-[6px] transition-transform duration-250 ease-[cubic-bezier(0.4,0,0.2,1)]">
                     {step.title}
                   </h3>
                   
@@ -387,15 +386,15 @@ export default function Home() {
         {/* ==========================================
             7. CASE STUDIES (HORIZ SCROLL)
         ========================================== */}
-        <section id="work" ref={caseStudiesRef} className="w-full h-screen bg-[#0A0A0A] flex items-center overflow-hidden">
-          <div className="px-10 shrink-0 w-[400px]">
-            <h2 className="text-[60px] leading-none mb-4">SYSTEM<br/>DEPLOYMENTS</h2>
+        <section id="work" ref={caseStudiesRef} className="w-full h-[80vh] md:h-screen bg-[#0A0A0A] flex items-center overflow-hidden">
+          <div className="px-6 md:px-10 shrink-0 w-[80vw] md:w-[400px]">
+            <h2 className="text-[40px] md:text-[60px] leading-none mb-4">SYSTEM<br/>DEPLOYMENTS</h2>
             <p className="text-body">Scroll to explore recent automated pipelines.</p>
           </div>
           
-          <div ref={caseStudiesWrapperRef} className="flex gap-10 px-10 h-[60vh] min-h-[400px] pl-[100px]">
+          <div ref={caseStudiesWrapperRef} className="flex gap-6 md:gap-10 px-6 md:px-10 h-[50vh] md:h-[60vh] min-h-[400px] pl-[50px] md:pl-[100px]">
             {CASE_STUDIES.map((cs, i) => (
-              <div key={i} className="group w-[600px] h-full bg-[#050505] border border-muted hover:border-accent transition-colors duration-300 p-12 flex flex-col justify-between relative overflow-hidden shrink-0">
+              <div key={i} className="group w-[80vw] md:w-[600px] h-full bg-[#050505] border border-muted hover:border-accent transition-colors duration-300 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden shrink-0">
                 <div className="flex justify-between items-start">
                   <span className="section-label text-body">{cs.ind}</span>
                   <div className="w-4 h-4 bg-muted group-hover:bg-accent transition-colors duration-300" />
@@ -418,13 +417,13 @@ export default function Home() {
         {/* ==========================================
             8. ABOUT US
         ========================================== */}
-        <section id="about" className="w-full py-[180px] px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted relative">
+        <section id="about" className="w-full py-[120px] md:py-[180px] px-6 md:px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted relative">
           <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-0 relative">
             
             {/* Left Column */}
-            <div className="lg:w-1/3 pr-10 lg:pr-24">
-              <div className="sticky top-1/3 overflow-hidden py-4">
-                <h2 className="about-title text-[60px] md:text-[80px] text-hollow leading-none origin-bottom-left">
+            <div className="lg:w-1/3 md:pr-10 lg:pr-24 mb-12 lg:mb-0">
+              <div className="lg:sticky top-1/3 overflow-hidden py-4">
+                <h2 className="about-title text-[50px] md:text-[80px] text-hollow leading-none origin-bottom-left">
                   WHO WE <br /> ARE
                 </h2>
               </div>
@@ -475,15 +474,15 @@ export default function Home() {
         {/* ==========================================
             9. CTA SECTION
         ========================================== */}
-        <section id="contact" className="w-full min-h-screen relative flex flex-col justify-center items-center text-center px-10 pt-[200px]">
+        <section id="contact" className="w-full min-h-screen relative flex flex-col justify-center items-center text-center px-6 md:px-10 pt-[120px] md:pt-[200px]">
           <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
             <svg viewBox="0 0 1440 120" className="w-full h-auto fill-[#0A0A0A]">
               <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" />
             </svg>
           </div>
 
-          <div className="reveal-item flex flex-col items-center z-10">
-            <h2 className="text-[8vw] leading-none mb-8">
+          <div className="reveal-item flex flex-col items-center z-10 w-full">
+            <h2 className="text-[40px] md:text-[8vw] leading-none mb-8">
               READY TO <br/><span className="text-accent">AUTOMATE?</span>
             </h2>
             <p className="text-body text-xl max-w-2xl mb-8 leading-relaxed">

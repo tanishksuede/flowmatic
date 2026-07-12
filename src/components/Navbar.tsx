@@ -37,7 +37,7 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent py-6"
       )}
     >
-      <div className="max-w-[1440px] mx-auto px-10 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 group interactive">
           <div className="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform duration-300" />
           <span className="font-heading text-2xl font-black uppercase tracking-tighter text-text-base">
