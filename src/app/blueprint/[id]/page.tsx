@@ -3,8 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 
-export default function BlueprintPage({ params }: { params: { id: string } }) {
-  const index = parseInt(params.id, 10);
+export default async function BlueprintPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const index = parseInt(id, 10);
   
   if (isNaN(index) || index < 0 || index >= CASE_STUDIES.length) {
     notFound();
