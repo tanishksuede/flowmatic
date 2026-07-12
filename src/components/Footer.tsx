@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 export default function Footer() {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +22,7 @@ export default function Footer() {
               </span>
             </button>
             <p className="text-body max-w-sm">
-              "We Automate the Work. You Close the Deals."<br/><br/>
+              &quot;We Automate the Work. You Close the Deals.&quot;<br/><br/>
               Engineered in Indore, deployed globally.
             </p>
           </div>

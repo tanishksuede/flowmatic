@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/components/Navbar";
@@ -125,11 +125,11 @@ export default function Home() {
 
       // 4. Scrubbed entry for the text rows relative to the whole section
       const aboutTexts = gsap.utils.toArray(".about-text");
-      aboutTexts.forEach((text: any, index: number) => {
+      aboutTexts.forEach((text: unknown, index: number) => {
         // Calculate dynamic start point based on index so they appear one by one as the pointer moves down
         const startPercentage = 30 + (index * 15); 
         
-        gsap.fromTo(text, 
+        gsap.fromTo(text as Element, 
           { x: 100, opacity: 0 }, 
           { 
             x: 0, 
@@ -150,8 +150,8 @@ export default function Home() {
     if (caseStudiesRef.current && caseStudiesWrapperRef.current) {
       const wrapper = caseStudiesWrapperRef.current;
       
-      let getScrollAmount = () => {
-        let wrapperWidth = wrapper.scrollWidth;
+      const getScrollAmount = () => {
+        const wrapperWidth = wrapper.scrollWidth;
         // The side text is 400px, window width minus 400 is the visible area for cards.
         // We add some extra padding to ensure the 3rd card fully clears the right edge.
         return -(wrapperWidth - (window.innerWidth - 450) + 200); 
@@ -405,7 +405,6 @@ export default function Home() {
                   <h3 className="text-[50px] leading-none mb-6 group-hover:text-accent transition-colors duration-300">{cs.res}</h3>
                   <p className="text-body mb-8 text-lg">{cs.title}</p>
                   <button 
-                    onClick={() => setActiveModal(i)}
                     className="uppercase font-bold tracking-widest text-sm border-b border-text-base pb-1 interactive hover:text-accent transition-colors duration-300"
                   >
                     View Architecture
@@ -487,8 +486,8 @@ export default function Home() {
             <h2 className="text-[8vw] leading-none mb-8">
               READY TO <br/><span className="text-accent">AUTOMATE?</span>
             </h2>
-            <p className="text-body text-xl mb-12 max-w-lg">
-              Book a zero-fluff architecture call with our system engineers. We'll map out exactly where your business is bleeding time.
+            <p className="text-body text-xl max-w-2xl mb-8 leading-relaxed">
+              Book a zero-fluff architecture call with our system engineers. We&apos;ll map out exactly where your business is bleeding time.
             </p>
             <button onClick={scrollToContact} className="bg-accent text-white px-12 py-6 font-heading text-2xl uppercase tracking-wider interactive hover:bg-white hover:text-[#050505] transition-colors duration-300">
               BOOK STRATEGY CALL
