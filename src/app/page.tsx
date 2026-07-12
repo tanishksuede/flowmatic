@@ -15,19 +15,19 @@ const CASE_STUDIES = [
     ind: "Marketing Agency (US)", 
     res: "20hrs saved per week", 
     title: "Automated client reporting pipeline pulling Meta/Google Ads data into plain-English emails.",
-    architecture: "We deployed a cron-triggered n8n workflow that authenticates with Meta Ads and Google Ads APIs via OAuth. Data is aggregated weekly into a structured JSON payload, which is then fed into Claude 3.5 Sonnet to generate a highly personalized, jargon-free executive summary. The final output is automatically formatted into an HTML email template and dispatched via SendGrid to 40+ clients every Monday morning."
+    architecture: "We connected their advertising platforms directly to a central dashboard. Every Monday, the system automatically pulls the latest campaign data, uses AI to write a clear, easy-to-read summary of the results, and sends beautifully formatted update emails to all their clients.\n\nKey Features:\n• Automated Data Collection\n• AI Performance Summaries\n• Zero-Touch Email Delivery"
   },
   { 
     ind: "B2B SaaS (UK)", 
     res: "45% higher reply rate", 
     title: "Hyper-personalized cold outreach sequence using intent-based scraping.",
-    architecture: "This pipeline utilizes Apify to scrape LinkedIn and Twitter for specific buying intent signals (e.g., companies asking for recommendations). The raw data is routed through an n8n webhook into Supabase. A background worker uses the Claude API to analyze the prospect's recent posts and generate a highly contextual opening line. The lead is then pushed directly into Instantly.ai campaigns via API, completely eliminating manual lead research."
+    architecture: "We built a system that actively monitors LinkedIn and Twitter for people asking for software recommendations. When it finds a strong lead, AI reads their recent posts to write a highly personalized opening message. The lead is then automatically added to an email outreach campaign.\n\nKey Features:\n• Intent-Based Lead Finding\n• AI Personalized Messaging\n• Hands-Free Outreach"
   },
   { 
     ind: "D2C E-commerce (AU)", 
     res: "Zero manual data entry", 
     title: "Unified CRM pipeline automation executing flawlessly in the background.",
-    architecture: "Built an event-driven architecture connecting Shopify webhooks to HubSpot. When a high-ticket cart is abandoned, n8n intercepts the payload, cross-references the customer's LTV in Supabase, and dynamically assigns a priority score. VIP customers instantly trigger a Slack alert to a human sales rep for a phone call, while standard customers enter an automated multi-step SMS recovery sequence via Twilio."
+    architecture: "We linked their Shopify store directly to their CRM. When someone abandons a high-value cart, the system checks if they are a repeat VIP customer. If they are, it instantly messages a sales rep to call them. If they are a standard customer, it automatically sends them a sequence of recovery text messages.\n\nKey Features:\n• Smart Customer Routing\n• VIP Sales Alerts\n• Automated SMS Recovery"
   }
 ];
 
@@ -39,6 +39,8 @@ export default function Home() {
   const shape1Ref = useRef<HTMLDivElement>(null);
   const shape2Ref = useRef<HTMLDivElement>(null);
   const shape3Ref = useRef<HTMLDivElement>(null);
+  const textLeftRef = useRef<HTMLSpanElement>(null);
+  const textRightRef = useRef<HTMLSpanElement>(null);
   const caseStudiesRef = useRef<HTMLElement>(null);
   const caseStudiesWrapperRef = useRef<HTMLDivElement>(null);
   
@@ -83,6 +85,20 @@ export default function Home() {
           end: "bottom top",
           scrub: 1,
         }
+      });
+
+      // Split text parallax
+      gsap.to(textLeftRef.current, {
+        x: -150,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
+      });
+      gsap.to(textRightRef.current, {
+        x: 150,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
       });
       
       gsap.to(shape1Ref.current, {
@@ -129,9 +145,12 @@ export default function Home() {
         }
       );
 
-      // 3. Scrubbed entry for the text rows
+      // 4. Scrubbed entry for the text rows relative to the whole section
       const aboutTexts = gsap.utils.toArray(".about-text");
-      aboutTexts.forEach((text: any) => {
+      aboutTexts.forEach((text: any, index: number) => {
+        // Calculate dynamic start point based on index so they appear one by one as the pointer moves down
+        const startPercentage = 30 + (index * 15); 
+        
         gsap.fromTo(text, 
           { x: 100, opacity: 0 }, 
           { 
@@ -139,9 +158,9 @@ export default function Home() {
             opacity: 1, 
             ease: "none",
             scrollTrigger: {
-              trigger: text,
-              start: "top 65%",
-              end: "top 45%",
+              trigger: aboutSection,
+              start: `top ${100 - startPercentage}%`,
+              end: `top ${85 - startPercentage}%`,
               scrub: 1,
             }
           }
@@ -200,9 +219,9 @@ export default function Home() {
 
           <div className="max-w-[1440px] mx-auto w-full relative z-10 flex justify-between items-center">
             <div className="flex flex-col">
-              <h1 className="text-[70px] md:text-[130px] leading-[0.85] tracking-tighter w-full max-w-4xl z-20 hero-headline">
-                WE AUTOMATE<br />
-                THE WORK.<br />
+              <h1 className="text-[70px] md:text-[130px] leading-[0.85] tracking-tighter w-full max-w-4xl z-20 hero-headline flex flex-col">
+                <span ref={textLeftRef} className="block w-fit">WE AUTOMATE</span>
+                <span ref={textRightRef} className="block w-fit">THE WORK.</span>
               </h1>
               
               <h2 ref={heroHollowRef} className="absolute top-[80px] left-[20px] text-[100px] md:text-[180px] leading-[0.8] text-hollow-thick opacity-40 z-10 select-none pointer-events-none">
@@ -496,8 +515,8 @@ export default function Home() {
             
             <div className="h-[1px] w-full bg-muted mb-8" />
             
-            <h3 className="section-label text-text-base mb-4">TECHNICAL DEPLOYMENT</h3>
-            <p className="text-body text-lg leading-relaxed">
+            <h3 className="section-label text-text-base mb-4">WORKFLOW & FEATURES</h3>
+            <p className="text-body text-lg leading-relaxed whitespace-pre-wrap">
               {CASE_STUDIES[activeModal].architecture}
             </p>
             
