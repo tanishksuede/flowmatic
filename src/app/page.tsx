@@ -393,7 +393,10 @@ export default function Home() {
         <section id="work" ref={caseStudiesRef} className="w-full h-[80vh] md:h-screen bg-[#0A0A0A] flex items-center overflow-hidden">
           <div className="px-6 md:px-10 shrink-0 w-[80vw] md:w-[400px]">
             <h2 className="text-[40px] md:text-[60px] leading-none mb-4">SYSTEM<br/>DEPLOYMENTS</h2>
-            <p className="text-body">Scroll to explore recent automated pipelines.</p>
+            <p className="text-body mb-8">Scroll to explore recent automated pipelines.</p>
+            <a href="/analytics.pdf" download className="btn-outline interactive inline-block text-sm border-text-base">
+              DOWNLOAD SAMPLE REPORT
+            </a>
           </div>
           
           <div ref={caseStudiesWrapperRef} className="flex gap-6 md:gap-10 px-6 md:px-10 h-[50vh] md:h-[60vh] min-h-[400px] pl-[50px] md:pl-[100px]">
