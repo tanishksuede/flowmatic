@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: #050505;
-  --color-text-base: #F5F5F0;
-  --color-accent: #2563EB;
+  --color-bg-base: #000000;
+  --color-text-base: #FFFFFF;
+  --color-accent: #2F6BFF;
   --color-muted: #1A1A1A;
-  --color-body: #9CA3AF;
+  --color-body: #A1A1AA;
   
   --font-heading: 'Space Grotesk', 'Syne', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -21,35 +21,30 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-black uppercase text-text-base;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 0.9;
+    @apply font-heading font-semibold text-text-base tracking-tight;
+    line-height: 1.1;
   }
 }
 
 @layer utilities {
-  .text-hollow {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(245, 245, 240, 0.25);
-  }
-
-  .text-hollow-thick {
-    color: transparent;
-    -webkit-text-stroke: 2px rgba(245, 245, 240, 0.9);
-  }
-
   .section-label {
-    @apply uppercase;
-    letter-spacing: 0.15em;
+    @apply uppercase text-xs font-semibold tracking-[0.2em] text-accent;
   }
 
-  .btn-outline {
-    @apply border border-accent bg-transparent text-text-base uppercase px-8 py-4 font-bold transition-colors duration-300;
+  .btn-primary {
+    @apply bg-accent text-white px-6 py-3 rounded-md font-medium transition-all duration-300 shadow-[0_0_20px_rgba(47,107,255,0.3)] hover:shadow-[0_0_30px_rgba(47,107,255,0.5)] hover:-translate-y-0.5;
   }
   
-  .btn-outline:hover {
-    @apply bg-accent text-[#050505];
+  .btn-secondary {
+    @apply border border-white/20 bg-white/5 text-white px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/30;
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl;
+  }
+  
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-2xl border border-white/5 rounded-2xl;
   }
 
   /* GSAP utility class */

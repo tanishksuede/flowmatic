@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CASE_STUDIES } from "../data/caseStudies";
@@ -15,13 +16,6 @@ const tools = ["n8n", "Supabase", "Twilio", "Groq", "Google Sheets", "Claude", "
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const bgNoiseRef = useRef<HTMLDivElement>(null);
-  const heroHollowRef = useRef<HTMLHeadingElement>(null);
-  const shape1Ref = useRef<HTMLDivElement>(null);
-  const shape2Ref = useRef<HTMLDivElement>(null);
-  const shape3Ref = useRef<HTMLDivElement>(null);
-  const textLeftRef = useRef<HTMLSpanElement>(null);
-  const textRightRef = useRef<HTMLSpanElement>(null);
   const caseStudiesRef = useRef<HTMLElement>(null);
   const caseStudiesWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -42,63 +36,7 @@ export default function Home() {
 
     gsap.set(".reveal-item", { autoAlpha: 0, y: 40 });
 
-    // ANIMATION 4: HERO PARALLAX
-    if (heroRef.current && bgNoiseRef.current && heroHollowRef.current) {
-      gsap.to(bgNoiseRef.current, {
-        yPercent: 10, 
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
-
-      gsap.to(heroHollowRef.current, {
-        yPercent: 25, 
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
-
-      // Split text parallax
-      gsap.to(textLeftRef.current, {
-        x: -150,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
-      });
-      gsap.to(textRightRef.current, {
-        x: 150,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
-      });
-      
-      gsap.to(shape1Ref.current, {
-        y: -150,
-        rotate: 5,
-        ease: "none",
-        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1 }
-      });
-      gsap.to(shape2Ref.current, {
-        y: -250,
-        x: -20,
-        ease: "none",
-        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1.5 }
-      });
-      gsap.to(shape3Ref.current, {
-        y: -80,
-        rotate: -5,
-        ease: "none",
-        scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 0.5 }
-      });
-    }
+    // HERO PARALLAX REMOVED (Replaced by CSS animations in Enterprise Redesign)
 
     // ANIMATION 8: ABOUT SECTION
     const aboutSection = document.getElementById("about");
@@ -216,56 +154,158 @@ export default function Home() {
         {/* ==========================================
             2. HERO SECTION
         ========================================== */}
-        <section ref={heroRef} className="relative w-full h-screen min-h-[800px] flex flex-col justify-center px-10 overflow-hidden">
-          <div ref={bgNoiseRef} className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/noise.png')", backgroundRepeat: "repeat" }} />
-          
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent rounded-full blur-[120px] opacity-[0.15] pointer-events-none z-0" />
+        <section ref={heroRef} className="relative w-full min-h-screen pt-32 pb-20 flex flex-col justify-center overflow-hidden">
+          {/* Subtle Background Gradients */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/20 rounded-full blur-[120px] pointer-events-none opacity-50 z-0" />
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] pointer-events-none z-0" />
 
-          <div className="max-w-[1440px] mx-auto w-full relative z-10 flex justify-between items-center">
-            <div className="flex flex-col">
-              <h1 className="text-[50px] md:text-[90px] lg:text-[130px] leading-[0.85] tracking-tighter w-full max-w-4xl z-20 hero-headline flex flex-col">
-                <span ref={textLeftRef} className="block w-fit">WE AUTOMATE</span>
-                <span ref={textRightRef} className="block w-fit">THE WORK.</span>
+          <div className="max-w-[1440px] mx-auto w-full px-6 md:px-10 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Column: Messaging Hierarchy */}
+            <div className="flex flex-col z-20 reveal-item">
+              <span className="text-accent font-semibold tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-3">
+                <span className="w-8 h-[1px] bg-accent"></span>
+                Custom AI Automation Agency
+              </span>
+              
+              <h1 className="text-[48px] md:text-[64px] lg:text-[72px] font-semibold leading-[1.05] tracking-tight mb-8">
+                Replace 20+ Hours of Weekly Operations with Custom AI Automation.
               </h1>
               
-              <h2 ref={heroHollowRef} className="absolute top-[60px] left-[10px] md:top-[80px] md:left-[20px] text-[60px] md:text-[120px] lg:text-[180px] leading-[0.8] text-hollow-thick opacity-40 z-10 select-none pointer-events-none">
-                FLOWMATIC
-              </h2>
-
-              <p className="mt-12 text-[18px] max-w-[520px] z-20">
-                You close the deals. We build AI-powered systems for marketing agencies and forward-thinking enterprises that eliminate manual repetitive tasks and compound your revenue.
+              <p className="text-lg md:text-xl text-body max-w-[560px] mb-10 leading-relaxed">
+                We design and deploy AI-powered workflows that eliminate reporting, lead follow-ups, client onboarding, data entry, and repetitive operations for marketing agencies and growing businesses.
               </p>
 
-              <div className="mt-12 z-20 w-fit">
-                <button onClick={scrollToContact} className="btn-outline interactive">
-                  BOOK A DEMO
+              <div className="flex flex-col gap-4 mb-10">
+                {[
+                  "Save 10–30 hours every week",
+                  "Deploy in 2–4 weeks",
+                  "Works with your existing tools",
+                  "No-code interface for your team"
+                ].map((benefit, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-accent" />
+                    <span className="text-text-base/90 font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <button onClick={scrollToContact} className="btn-primary flex items-center justify-center gap-2">
+                  Book Free Automation Audit
+                  <ArrowRight className="w-4 h-4" />
                 </button>
+                <button onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })} className="btn-secondary">
+                  View Case Studies
+                </button>
+              </div>
+
+              {/* Trust Signals */}
+              <div className="pt-8 border-t border-white/10 flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium text-text-base/80">Trusted by growing agencies</span>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4 text-sm font-medium text-body">
+                  <div className="flex flex-col"><span className="text-white text-xl font-semibold">20+</span> Workflows Delivered</div>
+                  <div className="flex flex-col"><span className="text-white text-xl font-semibold">98%</span> Client Satisfaction</div>
+                  <div className="flex flex-col"><span className="text-white text-xl font-semibold">20hrs</span> Avg. Saved/Week</div>
+                </div>
               </div>
             </div>
 
-            <div className="hidden lg:block relative w-[500px] h-[500px] pointer-events-none z-10">
-              {/* Shape 1 */}
-              <div ref={shape1Ref} className="absolute top-[10%] right-[15%] w-[200px] h-[240px] border border-accent bg-[#0A0A0A] p-5 flex flex-col justify-between shadow-2xl">
-                <div className="w-10 h-10 bg-accent" />
-                <div className="flex flex-col gap-1">
-                  <span className="text-[10px] text-text-base/40 uppercase tracking-widest">Trigger</span>
-                  <span className="font-heading text-lg text-text-base">WEBHOOK_IN</span>
+            {/* Right Column: Interactive Architecture Visualization */}
+            <div className="hidden lg:flex relative w-full h-[700px] items-center justify-center pointer-events-none z-10 reveal-item">
+              <div className="relative w-full max-w-[600px] h-full">
+                
+                {/* Central Orchestrator (n8n) */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass-panel p-6 flex flex-col items-center gap-3 z-30 shadow-[0_0_40px_rgba(47,107,255,0.2)] border-accent/30">
+                  <div className="w-16 h-16 rounded-xl bg-accent/20 flex items-center justify-center border border-accent/50">
+                    <Workflow className="w-8 h-8 text-accent" />
+                  </div>
+                  <span className="font-semibold text-white tracking-wide">Orchestrator Engine</span>
+                  <div className="flex gap-1.5 items-center bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
+                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span className="text-xs text-green-400 font-medium">Processing 24/7</span>
+                  </div>
                 </div>
-              </div>
-              
-              {/* Shape 2 */}
-              <div ref={shape2Ref} className="absolute top-[40%] left-[5%] w-[260px] h-[160px] border border-muted bg-[#050505] p-5 flex flex-col justify-between z-10 shadow-[8px_8px_0_#2563EB]">
-                <div className="flex justify-between items-start w-full">
-                  <span className="text-[10px] text-text-base/40 uppercase tracking-widest">Processing</span>
-                  <div className="w-2 h-2 bg-accent animate-pulse" />
+
+                {/* Top Node (Trigger / Webhook) */}
+                <div className="absolute top-[10%] left-1/2 -translate-x-1/2 glass-card p-4 flex items-center gap-4 z-20">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Zap className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-body uppercase tracking-wider">Trigger</span>
+                    <span className="font-medium text-white">Lead Captured</span>
+                  </div>
                 </div>
-                <span className="font-heading text-4xl text-text-base text-hollow tracking-tighter">LLM_CORE</span>
-              </div>
-              
-              {/* Shape 3 */}
-              <div ref={shape3Ref} className="absolute bottom-[15%] right-[25%] px-6 py-3 bg-text-base text-[#050505] font-bold text-sm uppercase tracking-widest flex items-center gap-3">
-                <div className="w-2 h-2 bg-[#050505] animate-pulse" />
-                SYSTEM.ACTIVE
+
+                {/* Bottom Left Node (AI Processing / OpenAI) */}
+                <div className="absolute bottom-[20%] left-[5%] glass-card p-4 flex items-center gap-4 z-20">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-body uppercase tracking-wider">AI Core</span>
+                    <span className="font-medium text-white">Data Enrichment</span>
+                  </div>
+                </div>
+
+                {/* Bottom Right Node (CRM / Slack) */}
+                <div className="absolute bottom-[20%] right-[5%] glass-card p-4 flex items-center gap-4 z-20">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <MessageSquare className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-body uppercase tracking-wider">Action</span>
+                    <span className="font-medium text-white">Team Notified</span>
+                  </div>
+                </div>
+                
+                {/* Top Right Node (Database / Hubspot) */}
+                <div className="absolute top-[25%] right-[0%] glass-card p-4 flex items-center gap-4 z-20">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Database className="w-5 h-5 text-orange-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-body uppercase tracking-wider">Sync</span>
+                    <span className="font-medium text-white">CRM Updated</span>
+                  </div>
+                </div>
+
+                {/* SVG Connecting Lines with glowing particles */}
+                <svg className="absolute inset-0 w-full h-full z-10 opacity-40" style={{ filter: "drop-shadow(0 0 8px rgba(47,107,255,0.5))" }}>
+                  {/* From Trigger down to Orchestrator */}
+                  <path d="M300,140 L300,310" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
+                  {/* From Orchestrator to AI */}
+                  <path d="M260,390 L130,510" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
+                  {/* From Orchestrator to Action */}
+                  <path d="M340,390 L470,510" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
+                  {/* From Orchestrator to Sync */}
+                  <path d="M340,310 L470,220" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
+                  
+                  <defs>
+                    <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#2F6BFF" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#2F6BFF" stopOpacity="0.2" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                <style dangerouslySetInnerHTML={{__html: `
+                  @keyframes dash {
+                    to {
+                      stroke-dashoffset: -1000;
+                    }
+                  }
+                `}} />
+
               </div>
             </div>
           </div>
