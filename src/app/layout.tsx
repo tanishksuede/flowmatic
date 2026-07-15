@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${syne.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${syne.variable}`} suppressHydrationWarning>
       <body className="antialiased overflow-x-hidden selection:bg-accent selection:text-white">
         <SmoothScroller>
           <CustomCursor />
