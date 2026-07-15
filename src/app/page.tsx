@@ -18,57 +18,58 @@ export default function Home() {
   const caseStudiesWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // ANIMATION 1: BATCH REVEALS
-    ScrollTrigger.batch(".reveal-item", {
-      onEnter: (elements) => {
-        gsap.to(elements, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.12,
+    const ctx = gsap.context(() => {
+      // ANIMATION 1: BATCH REVEALS
+      ScrollTrigger.batch(".reveal-item", {
+        onEnter: (elements) => {
+          gsap.to(elements, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.12,
+          });
+        },
+        once: true,
+      });
+
+      gsap.set(".reveal-item", { autoAlpha: 0, y: 40 });
+
+      // HERO PARALLAX REMOVED (Replaced by CSS animations in Enterprise Redesign)
+
+      // ABOUT SECTION REMOVED (Legacy)
+
+      // ANIMATION 7: CASE STUDIES HORIZONTAL SCROLL
+      if (caseStudiesRef.current && caseStudiesWrapperRef.current) {
+        const wrapper = caseStudiesWrapperRef.current;
+        
+        const getScrollAmount = () => {
+          // Total scrollable width minus viewport width plus some padding
+          const scrollWidth = wrapper.scrollWidth;
+          return -(scrollWidth - window.innerWidth + 100);
+        };
+
+        const tween = gsap.to(wrapper, {
+          x: getScrollAmount,
+          ease: "none"
         });
-      },
-      once: true,
+
+        ScrollTrigger.create({
+          trigger: caseStudiesRef.current,
+          start: "top top",
+          end: () => `+=${Math.abs(getScrollAmount())}`,
+          pin: true,
+          animation: tween,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        });
+      }
+
+      // GLOBAL WRENCH REMOVED (Legacy)
     });
 
-    gsap.set(".reveal-item", { autoAlpha: 0, y: 40 });
-
-    // HERO PARALLAX REMOVED (Replaced by CSS animations in Enterprise Redesign)
-
-    // ABOUT SECTION REMOVED (Legacy)
-
-    // ANIMATION 7: CASE STUDIES HORIZONTAL SCROLL
-    if (caseStudiesRef.current && caseStudiesWrapperRef.current) {
-      const wrapper = caseStudiesWrapperRef.current;
-      
-      const getScrollAmount = () => {
-        const totalWidth = wrapper.scrollWidth + wrapper.offsetLeft;
-        // Provide a massive buffer (half the screen width) to guarantee the 3rd card is fully visible
-        const padding = window.innerWidth * 0.5;
-        return -(totalWidth - window.innerWidth + padding);
-      };
-
-      const tween = gsap.to(wrapper, {
-        x: getScrollAmount,
-        ease: "none"
-      });
-
-      ScrollTrigger.create({
-        trigger: caseStudiesRef.current,
-        start: "top top",
-        end: () => `+=${getScrollAmount() * -1}`,
-        pin: true,
-        animation: tween,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      });
-    }
-
-    // GLOBAL WRENCH REMOVED (Legacy)
-
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ctx.revert();
     };
   }, []);
 
@@ -80,13 +81,6 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="relative">
-      {/* GLOBAL WRENCH */}
-      <div className="global-wrench fixed top-32 right-10 md:right-20 z-[5] pointer-events-none text-accent/30 hidden md:block">
-        <svg className="w-24 h-24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-        </svg>
-      </div>
-
       <Navbar />
 
       <main className="w-full">
