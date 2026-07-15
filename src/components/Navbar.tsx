@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 
 export default function Navbar() {
@@ -17,16 +18,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Work", href: "work" },
-    { name: "Services", href: "services" },
-    { name: "About", href: "about" },
-    { name: "Contact", href: "contact" },
-  ];
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <header 
@@ -46,15 +38,18 @@ export default function Navbar() {
         </button>
 
         <nav className="hidden md:flex items-center gap-12">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollToSection(link.href)}
-              className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive"
-            >
-              {link.name}
-            </button>
-          ))}
+          <Link href="/" className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive">
+            Home
+          </Link>
+          <Link href="/work" className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive">
+            Work
+          </Link>
+          <button
+            onClick={() => window.location.href = "mailto:hello@flowmatic.io"}
+            className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive"
+          >
+            Contact
+          </button>
         </nav>
       </div>
     </header>
