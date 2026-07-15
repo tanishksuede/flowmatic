@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Bot, Zap, MessageSquare, Database, CheckCircle2, Star, Workflow, X, Check } from "lucide-react";
+import { ArrowRight, Bot, Zap, MessageSquare, Database, CheckCircle2, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -75,9 +75,17 @@ export default function Home() {
                 Replace 20+ Hours of Weekly Operations with Custom AI Automation.
               </h1>
               
-              <p className="text-lg md:text-xl text-body max-w-[560px] mb-10 leading-relaxed">
-                We design and deploy AI-powered workflows that eliminate reporting, lead follow-ups, client onboarding, data entry, and repetitive operations specifically for marketing agencies.
-              </p>
+              <div className="flex flex-col gap-3 mb-10 border-l-2 border-accent/30 pl-4">
+                <p className="text-lg md:text-xl text-white font-medium">
+                  ✅ AI Lead Follow-ups
+                </p>
+                <p className="text-lg md:text-xl text-white font-medium">
+                  ✅ Automated Client Reporting
+                </p>
+                <p className="text-lg md:text-xl text-white font-medium">
+                  ✅ Instant Client Onboarding
+                </p>
+              </div>
 
               <div className="flex flex-col gap-4 mb-10">
                 {[
@@ -122,94 +130,68 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Interactive Architecture Visualization */}
-            <div className="hidden lg:flex relative w-full h-[700px] items-center justify-center pointer-events-none z-10 reveal-item">
-              <div className="relative w-full max-w-[600px] h-full">
-                
-                {/* Central Orchestrator (n8n) */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass-panel p-6 flex flex-col items-center gap-3 z-30 shadow-[0_0_40px_rgba(47,107,255,0.2)] border-accent/30">
-                  <div className="w-16 h-16 rounded-xl bg-accent/20 flex items-center justify-center border border-accent/50">
-                    <Workflow className="w-8 h-8 text-accent" />
+            {/* Right Column: Live Activity Feed */}
+            <div className="hidden lg:flex flex-col relative w-full h-[600px] justify-center z-10 reveal-item pl-10">
+               {/* 4 Cards that show step-by-step automation */}
+               <div className="flex flex-col gap-5 relative">
+                  {/* Vertical connecting line */}
+                  <div className="absolute left-[27px] top-10 bottom-10 w-[2px] bg-accent/20 z-0">
+                    <div className="w-full h-1/4 bg-accent animate-[slideDown_3s_linear_infinite]" />
                   </div>
-                  <span className="font-semibold text-white tracking-wide">Orchestrator Engine</span>
-                  <div className="flex gap-1.5 items-center bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
-                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                    <span className="text-xs text-green-400 font-medium">Processing 24/7</span>
-                  </div>
-                </div>
 
-                {/* Top Node (Trigger / Webhook) */}
-                <div className="absolute top-[10%] left-1/2 -translate-x-1/2 glass-card p-4 flex items-center gap-4 z-20">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <Zap className="w-5 h-5 text-yellow-400" />
+                  {/* Card 1 */}
+                  <div className="glass-card p-5 pr-8 flex items-center gap-4 z-10 w-fit shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border-white/10">
+                    <div className="w-14 h-14 rounded-full bg-[#1877F2]/10 flex items-center justify-center border border-[#1877F2]/30 shrink-0">
+                      <Database className="w-6 h-6 text-[#1877F2]" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Trigger</span>
+                      <span className="text-base font-semibold text-white">Meta Ads Lead Captured</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-body uppercase tracking-wider">Trigger</span>
-                    <span className="font-medium text-white">Lead Captured</span>
-                  </div>
-                </div>
 
-                {/* Bottom Left Node (AI Processing / OpenAI) */}
-                <div className="absolute bottom-[20%] left-[5%] glass-card p-4 flex items-center gap-4 z-20">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-purple-400" />
+                  {/* Card 2 */}
+                  <div className="glass-card p-5 pr-8 flex items-center gap-4 z-10 w-fit ml-8 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border-white/10">
+                    <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/30 shrink-0">
+                      <Bot className="w-6 h-6 text-purple-400" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">AI Processing</span>
+                      <span className="text-base font-semibold text-white">ChatGPT Personalizes Email</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-body uppercase tracking-wider">AI Core</span>
-                    <span className="font-medium text-white">Data Enrichment</span>
-                  </div>
-                </div>
 
-                {/* Bottom Right Node (CRM / Slack) */}
-                <div className="absolute bottom-[20%] right-[5%] glass-card p-4 flex items-center gap-4 z-20">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <MessageSquare className="w-5 h-5 text-blue-400" />
+                  {/* Card 3 */}
+                  <div className="glass-card p-5 pr-8 flex items-center gap-4 z-10 w-fit ml-16 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border-white/10">
+                    <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/30 shrink-0">
+                      <MessageSquare className="w-6 h-6 text-green-400" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Action</span>
+                      <span className="text-base font-semibold text-white">Email Sent via Gmail API</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-body uppercase tracking-wider">Action</span>
-                    <span className="font-medium text-white">Team Notified</span>
-                  </div>
-                </div>
-                
-                {/* Top Right Node (Database / Hubspot) */}
-                <div className="absolute top-[25%] right-[0%] glass-card p-4 flex items-center gap-4 z-20">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <Database className="w-5 h-5 text-orange-400" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-body uppercase tracking-wider">Sync</span>
-                    <span className="font-medium text-white">CRM Updated</span>
-                  </div>
-                </div>
 
-                {/* SVG Connecting Lines with glowing particles (Removed drop-shadow for 120 FPS performance) */}
-                <svg className="absolute inset-0 w-full h-full z-10 opacity-40">
-                  {/* From Trigger down to Orchestrator */}
-                  <path d="M300,140 L300,310" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
-                  {/* From Orchestrator to AI */}
-                  <path d="M260,390 L130,510" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
-                  {/* From Orchestrator to Action */}
-                  <path d="M340,390 L470,510" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
-                  {/* From Orchestrator to Sync */}
-                  <path d="M340,310 L470,220" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
-                  
-                  <defs>
-                    <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#2F6BFF" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#2F6BFF" stopOpacity="0.2" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                <style dangerouslySetInnerHTML={{__html: `
-                  @keyframes dash {
-                    to {
-                      stroke-dashoffset: -1000;
-                    }
-                  }
-                `}} />
-
-              </div>
+                  {/* Card 4 */}
+                  <div className="glass-card p-5 pr-8 flex items-center gap-4 z-10 w-fit ml-24 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border-white/10">
+                    <div className="w-14 h-14 rounded-full bg-[#E01E5A]/10 flex items-center justify-center border border-[#E01E5A]/30 shrink-0">
+                      <Zap className="w-6 h-6 text-[#E01E5A]" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Sync & Notify</span>
+                      <span className="text-base font-semibold text-white">Hubspot Updated + Slack Alert</span>
+                    </div>
+                  </div>
+               </div>
+               
+               <style dangerouslySetInnerHTML={{__html: `
+                 @keyframes slideDown {
+                   0% { transform: translateY(-100%); opacity: 0; }
+                   20% { opacity: 1; }
+                   80% { opacity: 1; }
+                   100% { transform: translateY(400%); opacity: 0; }
+                 }
+               `}} />
             </div>
           </div>
         </section>
@@ -280,14 +262,18 @@ export default function Home() {
                   desc: "Same emails. Same folder setup. Same checklist. Done manually every single time." 
                 }
               ].map((item, i) => (
-                <div key={i} className="bg-[#0D0D0D] border border-[#2563EB] p-10 flex flex-col gap-4 reveal-item hover:-translate-y-2 transition-transform duration-300">
-                  <span className="text-5xl md:text-6xl text-white font-heading font-bold tracking-tight">
+                <div key={i} className="relative group bg-[#0D0D0D] border border-red-500/30 p-10 flex flex-col gap-4 reveal-item hover:-translate-y-2 transition-all duration-300">
+                  {/* Pulsing red background glow */}
+                  <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute -inset-[1px] bg-red-500/20 blur-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  <span className="text-5xl md:text-6xl text-white font-heading font-bold tracking-tight z-10">
                     {item.stat}
                   </span>
-                  <span className="text-[#2563EB] font-bold text-lg leading-tight">
+                  <span className="text-red-500 font-bold text-lg leading-tight z-10">
                     {item.label}
                   </span>
-                  <p className="text-white/60 text-sm leading-relaxed mt-2">
+                  <p className="text-white/60 text-sm leading-relaxed mt-2 z-10">
                     {item.desc}
                   </p>
                 </div>
@@ -297,84 +283,109 @@ export default function Home() {
         </section>
 
         {/* ==========================================
-            8. WHY FLOWMATIC (COMPARISON)
+            8. OLD WAY VS NEW WAY
         ========================================== */}
         <section className="w-full py-24 md:py-32 bg-black border-y border-white/5">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10">
             <div className="flex flex-col items-center text-center mb-16 reveal-item">
               <span className="section-label mb-4">The Flowmatic Edge</span>
               <h2 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
-                Why businesses choose custom systems over DIY Zapier scripts.
+                Manual Chaos vs. Automated Clarity
               </h2>
             </div>
             
-            <div className="w-full max-w-4xl mx-auto glass-panel overflow-hidden reveal-item">
-              <div className="grid grid-cols-3 bg-[#0A0A0A] p-6 border-b border-white/10">
-                <div className="text-body font-semibold uppercase tracking-wider text-sm">Feature</div>
-                <div className="text-white/50 font-semibold uppercase tracking-wider text-sm text-center">DIY / Freelancers</div>
-                <div className="text-accent font-semibold uppercase tracking-wider text-sm text-center flex items-center justify-center gap-2">
-                  <Star className="w-4 h-4 fill-accent" />
-                  Flowmatic
+            <div className="w-full max-w-5xl mx-auto grid md:grid-cols-2 gap-8 reveal-item">
+              {/* Left: Old Way (Messy) */}
+              <div className="glass-card p-10 border-red-500/20 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
+                <div className="absolute inset-0 bg-red-500/5 pointer-events-none" />
+                <span className="absolute top-6 left-6 text-red-500 font-bold uppercase tracking-wider text-sm bg-red-500/10 px-3 py-1 rounded">The Old Way</span>
+                
+                <div className="relative w-full h-full flex items-center justify-center">
+                   {/* Messy scattered nodes */}
+                   <div className="absolute top-[10%] left-[20%] w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 animate-[wiggle_3s_ease-in-out_infinite]"><Database className="w-5 h-5"/></div>
+                   <div className="absolute bottom-[20%] left-[10%] w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 animate-[wiggle_4s_ease-in-out_infinite]"><MessageSquare className="w-5 h-5"/></div>
+                   <div className="absolute top-[30%] right-[20%] w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 animate-[wiggle_2.5s_ease-in-out_infinite]"><Bot className="w-5 h-5"/></div>
+                   <div className="absolute bottom-[10%] right-[30%] w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 animate-[wiggle_3.5s_ease-in-out_infinite]"><Zap className="w-5 h-5"/></div>
+                   <div className="absolute top-[0%] right-[40%] w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 animate-[wiggle_2s_ease-in-out_infinite]"><CheckCircle2 className="w-5 h-5"/></div>
+                   
+                   {/* Tangled chaotic SVG lines */}
+                   <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none">
+                     <path d="M 80,80 Q 150,180 250,130 T 350,230 T 150,280" stroke="#ef4444" strokeWidth="2" fill="none" />
+                     <path d="M 350,80 Q 200,30 150,130 T 250,230 T 80,280" stroke="#ef4444" strokeWidth="2" fill="none" />
+                   </svg>
+                   
+                   <div className="z-10 bg-[#0A0A0A] px-6 py-3 rounded-full border border-red-500/30 text-white font-medium shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+                     Data Silos & Copy-Pasting
+                   </div>
                 </div>
               </div>
-              
-              <div className="flex flex-col">
-                {[
-                  { feature: "Strategic Approach", bad: "Band-aid fixes", good: "Full architecture audits" },
-                  { feature: "Workflows", bad: "Fragile & unscalable", good: "Stress-tested & resilient" },
-                  { feature: "Documentation", bad: "None", good: "Comprehensive logic maps" },
-                  { feature: "Team Training", bad: "Figure it out yourself", good: "Dedicated onboarding calls" },
-                  { feature: "Support", bad: "Ghosted after payment", good: "Ongoing SLA & maintenance" },
-                  { feature: "Business ROI", bad: "Unknown", good: "Guaranteed hours saved" }
-                ].map((row, i) => (
-                  <div key={i} className={`grid grid-cols-3 p-6 items-center ${i !== 5 ? 'border-b border-white/5' : ''} hover:bg-white/5 transition-colors`}>
-                    <div className="text-white font-medium">{row.feature}</div>
-                    <div className="flex items-center justify-center gap-2 text-white/50">
-                      <X className="w-4 h-4 text-red-500/50" />
-                      <span className="text-sm">{row.bad}</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 text-white font-medium">
-                      <Check className="w-4 h-4 text-accent" />
-                      <span className="text-sm">{row.good}</span>
-                    </div>
-                  </div>
-                ))}
+
+              {/* Right: New Way (Automated) */}
+              <div className="glass-card p-10 border-accent/30 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
+                <div className="absolute inset-0 bg-accent/5 pointer-events-none" />
+                <span className="absolute top-6 left-6 text-accent font-bold uppercase tracking-wider text-sm bg-accent/10 px-3 py-1 rounded">The Flowmatic Way</span>
+                
+                <div className="relative w-full h-full flex flex-col items-center justify-center gap-8 mt-4">
+                   {/* Clean straight line pipeline */}
+                   <div className="flex items-center justify-between w-full px-4 relative z-10">
+                     <div className="w-14 h-14 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/50 flex items-center justify-center z-10"><Database className="w-6 h-6 text-[#1877F2]"/></div>
+                     <div className="w-14 h-14 rounded-full bg-purple-500/10 border border-purple-500/50 flex items-center justify-center z-10"><Bot className="w-6 h-6 text-purple-400"/></div>
+                     <div className="w-14 h-14 rounded-full bg-[#E01E5A]/10 border border-[#E01E5A]/50 flex items-center justify-center z-10"><Zap className="w-6 h-6 text-[#E01E5A]"/></div>
+                   </div>
+
+                   {/* Straight flowing SVG line */}
+                   <svg className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-[40px] pointer-events-none z-0 -mt-8">
+                     <line x1="10%" y1="20" x2="90%" y2="20" stroke="#2563EB" strokeWidth="3" strokeDasharray="6 6" className="animate-[dash_2s_linear_infinite]" opacity="0.5" />
+                   </svg>
+
+                   <div className="z-10 bg-accent/10 backdrop-blur px-6 py-3 rounded-full border border-accent/30 text-white font-medium shadow-[0_0_20px_rgba(37,99,235,0.2)]">
+                     Seamless Automated Pipeline
+                   </div>
+                </div>
               </div>
             </div>
+            
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes wiggle {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                25% { transform: translate(5px, 5px) rotate(5deg); }
+                50% { transform: translate(0, 10px) rotate(0deg); }
+                75% { transform: translate(-5px, 5px) rotate(-5deg); }
+              }
+            `}} />
           </div>
         </section>
 
         {/* ==========================================
-            9. OUR PROCESS
+            9. TOOLS WE AUTOMATE
         ========================================== */}
-        <section className="w-full py-24 md:py-32 bg-[#050505]">
+        <section className="w-full py-24 md:py-32 bg-[#050505] overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10">
-            <div className="flex flex-col items-start mb-16 reveal-item">
-              <span className="section-label mb-4">Enterprise Implementation</span>
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
-                From discovery to deployment.
+            <div className="flex flex-col items-center text-center mb-16 reveal-item">
+              <span className="section-label mb-4">Integrations</span>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
+                We connect the tools you already use.
               </h2>
             </div>
             
-            <div className="relative flex flex-col md:flex-row justify-between gap-8 md:gap-4 reveal-item">
-              {/* SVG Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-[5%] right-[5%] h-[2px] bg-white/10 z-0">
-                <div className="h-full bg-accent w-1/3 animate-pulse" />
-              </div>
-
+            <div className="relative w-full max-w-5xl mx-auto flex flex-wrap justify-center gap-4 reveal-item">
               {[
-                { step: "01", title: "Discovery", desc: "Deep dive into your operational bottlenecks." },
-                { step: "02", title: "Blueprint", desc: "Detailed logic maps and architecture design." },
-                { step: "03", title: "Development", desc: "Building the engine in a staging environment." },
-                { step: "04", title: "Deployment", desc: "Going live and onboarding your team." },
-                { step: "05", title: "Optimization", desc: "Ongoing monitoring and SLA maintenance." }
-              ].map((phase, i) => (
-                <div key={i} className="flex flex-col gap-4 relative z-10 bg-[#050505] p-2 md:w-1/5">
-                  <div className="w-24 h-24 rounded-full glass-card flex items-center justify-center text-3xl font-heading text-white border-accent/30 shadow-[0_0_30px_rgba(47,107,255,0.1)]">
-                    {phase.step}
-                  </div>
-                  <h3 className="text-xl text-white font-semibold mt-2">{phase.title}</h3>
-                  <p className="text-body text-sm leading-relaxed">{phase.desc}</p>
+                { name: "HubSpot", color: "text-[#FF7A59]", bg: "bg-[#FF7A59]/10", border: "border-[#FF7A59]/20" },
+                { name: "GoHighLevel", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+                { name: "Meta Ads", color: "text-[#1877F2]", bg: "bg-[#1877F2]/10", border: "border-[#1877F2]/20" },
+                { name: "Google Ads", color: "text-[#EA4335]", bg: "bg-[#EA4335]/10", border: "border-[#EA4335]/20" },
+                { name: "Slack", color: "text-[#E01E5A]", bg: "bg-[#E01E5A]/10", border: "border-[#E01E5A]/20" },
+                { name: "ChatGPT", color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+                { name: "Apollo.io", color: "text-yellow-400", bg: "bg-yellow-500/10", border: "border-yellow-500/20" },
+                { name: "Gmail", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
+                { name: "Stripe", color: "text-[#635BFF]", bg: "bg-[#635BFF]/10", border: "border-[#635BFF]/20" },
+                { name: "Airtable", color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+                { name: "Make / n8n", color: "text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
+                { name: "Calendly", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" }
+              ].map((tool, i) => (
+                <div key={i} className={`flex items-center gap-3 px-6 py-4 rounded-full border ${tool.border} ${tool.bg} hover:scale-105 transition-transform duration-300 cursor-default`}>
+                  <div className={`w-2 h-2 rounded-full ${tool.bg.replace('/10', '')} shadow-[0_0_8px_currentColor] ${tool.color}`} />
+                  <span className={`font-semibold text-lg ${tool.color}`}>{tool.name}</span>
                 </div>
               ))}
             </div>
