@@ -18,6 +18,11 @@
     font-size: 15px;
     line-height: 1.7;
     color: var(--color-body);
+    cursor: none;
+  }
+  
+  a, button, [role="button"], input, textarea, select, .interactive {
+    cursor: none !important;
   }
   
   h1, h2, h3, h4, h5, h6 {

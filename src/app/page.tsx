@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Bot, Zap, MessageSquare, Database, CheckCircle2, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,9 +107,9 @@ export default function Home() {
                   Book Free Automation Audit
                   <ArrowRight className="w-4 h-4" />
                 </button>
-                <button onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })} className="btn-secondary">
+                <Link href="/work" className="btn-secondary flex items-center justify-center">
                   View Case Studies
-                </button>
+                </Link>
               </div>
 
               {/* Trust Signals */}

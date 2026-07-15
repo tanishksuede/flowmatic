@@ -5,21 +5,28 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 
 export default function MagneticCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-    // QuickSetter for high-performance GSAP updates
-    const xTo = gsap.quickTo(cursor, "x", { duration: 0.4, ease: "power3" });
-    const yTo = gsap.quickTo(cursor, "y", { duration: 0.4, ease: "power3" });
+    // Fast follower for the dot (almost instant)
+    const xToDot = gsap.quickTo(dot, "x", { duration: 0.05, ease: "power3" });
+    const yToDot = gsap.quickTo(dot, "y", { duration: 0.05, ease: "power3" });
+    
+    // Slower follower for the ring (creates the smooth trailing effect)
+    const xToRing = gsap.quickTo(ring, "x", { duration: 0.4, ease: "power3" });
+    const yToRing = gsap.quickTo(ring, "y", { duration: 0.4, ease: "power3" });
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Lerp effect is handled by quickTo's duration/ease
-      xTo(e.clientX);
-      yTo(e.clientY);
+      xToDot(e.clientX);
+      yToDot(e.clientY);
+      xToRing(e.clientX);
+      yToRing(e.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -30,24 +37,32 @@ export default function MagneticCursor() {
   }, []);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
+    const ring = ringRef.current;
+    const dot = dotRef.current;
+    if (!ring || !dot) return;
 
-    // Add magnetic pull to buttons and scaling
     const interactables = document.querySelectorAll("a, button, .interactive");
     
-    const handleMouseEnter = (e: Event) => {
-      const target = e.currentTarget as HTMLElement;
-      
-      if (target.classList.contains("hero-headline")) {
-        gsap.to(cursor, { scale: 4, filter: "blur(2px)", rotation: 45, duration: 0.3, ease: "power2.out" });
-      } else {
-        gsap.to(cursor, { scale: 2.5, duration: 0.3, ease: "power2.out", mixBlendMode: "difference" });
-      }
+    const handleMouseEnter = () => {
+      gsap.to(ring, { 
+        scale: 1.5, 
+        borderColor: "rgba(255,255,255,0.8)", 
+        backgroundColor: "rgba(255,255,255,0.1)", 
+        duration: 0.3, 
+        ease: "power2.out" 
+      });
+      gsap.to(dot, { scale: 0, opacity: 0, duration: 0.2 });
     };
     
     const handleMouseLeave = () => {
-      gsap.to(cursor, { scale: 1, filter: "blur(0px)", rotation: 0, duration: 0.3, ease: "power2.out", mixBlendMode: "normal" });
+      gsap.to(ring, { 
+        scale: 1, 
+        borderColor: "rgba(37,99,235,0.5)", 
+        backgroundColor: "transparent", 
+        duration: 0.3, 
+        ease: "power2.out" 
+      });
+      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.2 });
     };
 
     // Very basic magnetic pull (shift center)
@@ -58,13 +73,7 @@ export default function MagneticCursor() {
       const relX = mouseEvent.clientX - rect.left - rect.width / 2;
       const relY = mouseEvent.clientY - rect.top - rect.height / 2;
       
-      // Move target slightly towards mouse
-      gsap.to(target, {
-        x: relX * 0.2,
-        y: relY * 0.2,
-        duration: 0.3,
-        ease: "power2.out"
-      });
+      gsap.to(target, { x: relX * 0.2, y: relY * 0.2, duration: 0.3, ease: "power2.out" });
     };
 
     const handleMagneticLeave = (e: Event) => {
@@ -76,8 +85,7 @@ export default function MagneticCursor() {
       el.addEventListener("mouseenter", handleMouseEnter);
       el.addEventListener("mouseleave", handleMouseLeave);
       
-      // Only apply magnetic pull to specific buttons, not standard text links
-      if (el.classList.contains("btn-outline") || el.tagName.toLowerCase() === "button") {
+      if (el.tagName.toLowerCase() === "button" || el.classList.contains("btn-outline")) {
         el.addEventListener("mousemove", handleMagneticMove);
         el.addEventListener("mouseleave", handleMagneticLeave);
       }
@@ -87,7 +95,7 @@ export default function MagneticCursor() {
       interactables.forEach((el) => {
         el.removeEventListener("mouseenter", handleMouseEnter);
         el.removeEventListener("mouseleave", handleMouseLeave);
-        if (el.classList.contains("btn-outline") || el.tagName.toLowerCase() === "button") {
+        if (el.tagName.toLowerCase() === "button" || el.classList.contains("btn-outline")) {
           el.removeEventListener("mousemove", handleMagneticMove);
           el.removeEventListener("mouseleave", handleMagneticLeave);
         }
@@ -96,10 +104,17 @@ export default function MagneticCursor() {
   }, [pathname]);
 
   return (
-    <div 
-      ref={cursorRef} 
-      className="fixed top-0 left-0 w-5 h-5 bg-accent rounded-full pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 will-change-transform flex items-center justify-center"
-      style={{ mixBlendMode: "normal" }}
-    />
+    <>
+      {/* The Trailing Ring */}
+      <div 
+        ref={ringRef} 
+        className="fixed top-0 left-0 w-10 h-10 border border-accent/50 rounded-full pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+      />
+      {/* The Fast Dot */}
+      <div 
+        ref={dotRef} 
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+      />
+    </>
   );
 }
