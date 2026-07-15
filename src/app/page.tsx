@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap, X, Check, Laptop, Briefcase, Home as HomeIcon, TrendingUp } from "lucide-react";
+import { ArrowRight, Bot, Zap, MessageSquare, Database, CheckCircle2, Star, Workflow, X, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -251,53 +251,45 @@ export default function Home() {
 
 
         {/* ==========================================
-            7. WHO WE HELP
+            7. THE COST OF DOING IT MANUALLY
         ========================================== */}
         <section className="w-full py-24 md:py-32 bg-[#050505]">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10">
             <div className="flex flex-col items-center text-center mb-16 reveal-item">
-              <span className="section-label mb-4">Target Industries</span>
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
-                We engineer automated systems for complex operations.
+              <span className="section-label mb-4">The Problem</span>
+              <h2 className="text-4xl md:text-6xl font-semibold tracking-tight max-w-4xl uppercase font-heading">
+                THE COST OF DOING IT MANUALLY
               </h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { 
-                  icon: TrendingUp, 
-                  title: "Paid Media Agencies", 
-                  problems: ["Manual ROAS reporting", "Delayed lead routing", "Repetitive ad account setups"] 
+                  stat: "20 Hours", 
+                  label: "Lost every week to manual reporting", 
+                  desc: "Your team pulls the same numbers from the same platforms every Monday. For every client." 
                 },
                 { 
-                  icon: Laptop, 
-                  title: "SEO Agencies", 
-                  problems: ["Incomplete keyword tracking", "Manual backlink outreach", "Disjointed rank reporting"] 
+                  stat: "78%", 
+                  label: "Of leads go cold within 24 hours", 
+                  desc: "Because no one followed up fast enough. Your competitor did." 
                 },
                 { 
-                  icon: Briefcase, 
-                  title: "Lead Gen Agencies", 
-                  problems: ["Manual lead enrichment", "Disjointed cold outreach", "Dropped follow-ups"] 
-                },
-                { 
-                  icon: HomeIcon, 
-                  title: "Creative Agencies", 
-                  problems: ["Asset approval delays", "Manual invoice chasing", "Messy client onboarding"] 
+                  stat: "4 Hours", 
+                  label: "Wasted onboarding every new client", 
+                  desc: "Same emails. Same folder setup. Same checklist. Done manually every single time." 
                 }
-              ].map((industry, i) => (
-                <div key={i} className="glass-card p-8 flex flex-col gap-6 reveal-item hover:-translate-y-2 transition-transform duration-300">
-                  <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20">
-                     <industry.icon className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="text-xl text-white font-semibold">{industry.title}</h3>
-                  <div className="flex flex-col gap-3 border-t border-white/5 pt-4">
-                    {industry.problems.map((problem, j) => (
-                      <div key={j} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-accent/70 mt-0.5 shrink-0" />
-                        <span className="text-body text-sm leading-tight">{problem}</span>
-                      </div>
-                    ))}
-                  </div>
+              ].map((item, i) => (
+                <div key={i} className="bg-[#0D0D0D] border border-[#2563EB] p-10 flex flex-col gap-4 reveal-item hover:-translate-y-2 transition-transform duration-300">
+                  <span className="text-5xl md:text-6xl text-white font-heading font-bold tracking-tight">
+                    {item.stat}
+                  </span>
+                  <span className="text-[#2563EB] font-bold text-lg leading-tight">
+                    {item.label}
+                  </span>
+                  <p className="text-white/60 text-sm leading-relaxed mt-2">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
             </div>
