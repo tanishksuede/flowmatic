@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap, Quote, X, Check, Laptop, Briefcase, Home, TrendingUp } from "lucide-react";
+import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap, Quote, X, Check, Laptop, Briefcase, Home as HomeIcon, TrendingUp } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CASE_STUDIES } from "../data/caseStudies";
@@ -419,7 +419,7 @@ export default function Home() {
                   problems: ["Manual contract generation", "Disjointed intake forms", "Invoice chasing"] 
                 },
                 { 
-                  icon: Home, 
+                  icon: HomeIcon, 
                   title: "Real Estate", 
                   problems: ["Cold lead nurturing", "Manual MLS scraping", "Dropped follow-ups"] 
                 }
