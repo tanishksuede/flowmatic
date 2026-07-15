@@ -36,52 +36,7 @@ export default function Home() {
 
     // HERO PARALLAX REMOVED (Replaced by CSS animations in Enterprise Redesign)
 
-    // ANIMATION 8: ABOUT SECTION
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      // 1. Title entry
-      gsap.fromTo(".about-title", 
-        { y: 150, opacity: 0, rotateZ: 5 }, 
-        { y: 0, opacity: 1, rotateZ: 0, duration: 1.2, ease: "power4.out", scrollTrigger: { trigger: aboutSection, start: "top 70%" } }
-      );
-      
-      // 2. Center Pointer Animation
-      gsap.fromTo(".about-pointer", 
-        { top: "0%" },
-        { 
-          top: "100%", 
-          ease: "none",
-          scrollTrigger: {
-            trigger: aboutSection,
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
-          }
-        }
-      );
-
-      // 4. Scrubbed entry for the text rows relative to the whole section
-      const aboutTexts = gsap.utils.toArray(".about-text");
-      aboutTexts.forEach((text: unknown, index: number) => {
-        // Calculate dynamic start point based on index so they appear one by one as the pointer moves down
-        const startPercentage = 30 + (index * 15); 
-        
-        gsap.fromTo(text as Element, 
-          { x: 100, opacity: 0 }, 
-          { 
-            x: 0, 
-            opacity: 1, 
-            ease: "none",
-            scrollTrigger: {
-              trigger: aboutSection,
-              start: `top ${100 - startPercentage}%`,
-              end: `top ${85 - startPercentage}%`,
-              scrub: 1,
-            }
-          }
-        );
-      });
-    }
+    // ABOUT SECTION REMOVED (Legacy)
 
     // ANIMATION 7: CASE STUDIES HORIZONTAL SCROLL
     if (caseStudiesRef.current && caseStudiesWrapperRef.current) {
@@ -110,21 +65,7 @@ export default function Home() {
       });
     }
 
-    // ANIMATION 9: GLOBAL WRENCH
-    const wrenchTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-      }
-    });
-
-    wrenchTl
-      .to(".global-wrench", { x: "-70vw", y: "20vh", rotateZ: -90, scale: 1.5, duration: 1 })
-      .to(".global-wrench", { x: "-10vw", y: "40vh", rotateZ: 180, scale: 0.8, duration: 1 })
-      .to(".global-wrench", { x: "-40vw", y: "60vh", rotateZ: 360, scale: 4, opacity: 0.1, duration: 1 })
-      .to(".global-wrench", { x: "-40vw", y: "80vh", rotateZ: 720, scale: 1, opacity: 0.5, duration: 1 });
+    // GLOBAL WRENCH REMOVED (Legacy)
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -277,8 +218,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* SVG Connecting Lines with glowing particles */}
-                <svg className="absolute inset-0 w-full h-full z-10 opacity-40" style={{ filter: "drop-shadow(0 0 8px rgba(47,107,255,0.5))" }}>
+                {/* SVG Connecting Lines with glowing particles (Removed drop-shadow for 120 FPS performance) */}
+                <svg className="absolute inset-0 w-full h-full z-10 opacity-40">
                   {/* From Trigger down to Orchestrator */}
                   <path d="M300,140 L300,310" stroke="url(#blue-gradient)" strokeWidth="2" strokeDasharray="4 4" fill="none" className="animate-[dash_20s_linear_infinite]" />
                   {/* From Orchestrator to AI */}
@@ -618,7 +559,7 @@ export default function Home() {
             </a>
           </div>
           
-          <div ref={caseStudiesWrapperRef} className="flex gap-6 md:gap-10 px-6 md:px-10 h-[50vh] md:h-[60vh] min-h-[400px] pl-[50px] md:pl-[100px]">
+          <div ref={caseStudiesWrapperRef} className="flex gap-6 md:gap-10 px-6 md:px-10 h-[50vh] md:h-[60vh] min-h-[400px] pl-[50px] md:pl-[100px]" style={{ willChange: "transform" }}>
             {CASE_STUDIES.map((cs, i) => (
               <div key={i} className="group w-[80vw] md:w-[600px] h-full bg-[#050505] border border-muted hover:border-accent transition-colors duration-300 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden shrink-0">
                 <div className="flex justify-between items-start">
