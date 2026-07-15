@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap, Quote, Code, Unlock, BookOpen, Users, LifeBuoy } from "lucide-react";
+import { CheckCircle2, Star, ArrowRight, Bot, Workflow, MessageSquare, Database, Zap, Quote, X, Check, Laptop, Briefcase, Home, TrendingUp } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CASE_STUDIES } from "../data/caseStudies";
@@ -449,32 +449,160 @@ export default function Home() {
         </section>
 
         {/* ==========================================
-            6.5. WHY CHOOSE FLOWMATIC
+            7. WHO WE HELP
         ========================================== */}
         <section className="w-full py-24 md:py-32 bg-[#050505]">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10">
             <div className="flex flex-col items-center text-center mb-16 reveal-item">
-              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-                An enterprise-grade partnership.
+              <span className="section-label mb-4">Target Industries</span>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
+                We engineer automated systems for complex operations.
               </h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { icon: Code, title: "Custom-Built Systems", desc: "No cookie-cutter templates. We architect solutions specifically for your unique tech stack and operational bottlenecks." },
-                { icon: Unlock, title: "No Vendor Lock-In", desc: "You own the infrastructure. We build on transparent platforms like n8n so you have full control over your data." },
-                { icon: Zap, title: "Fast Deployment", desc: "We deploy MVPs in days, not months. You start seeing ROI and time savings almost immediately." },
-                { icon: BookOpen, title: "Full Documentation", desc: "Every workflow comes with comprehensive technical documentation and a plain-English logic map." },
-                { icon: Users, title: "Team Training", desc: "We don't just hand over the keys. We train your team on how to manage, monitor, and scale the automation." },
-                { icon: LifeBuoy, title: "Ongoing Support", desc: "APIs change. Processes evolve. We provide ongoing maintenance to ensure 99.9% workflow reliability." }
-              ].map((feature, i) => (
-                <div key={i} className="p-8 border border-white/5 rounded-xl hover:bg-white/5 transition-colors reveal-item">
-                  <feature.icon className="w-8 h-8 text-accent mb-6" />
-                  <h3 className="text-xl text-white font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-body leading-relaxed">{feature.desc}</p>
+                { 
+                  icon: TrendingUp, 
+                  title: "Marketing Agencies", 
+                  problems: ["Manual client reporting", "Delayed lead routing", "Repetitive onboarding"] 
+                },
+                { 
+                  icon: Laptop, 
+                  title: "SaaS Companies", 
+                  problems: ["Incomplete user data", "Churn prediction delays", "Support ticket routing"] 
+                },
+                { 
+                  icon: Briefcase, 
+                  title: "Professional Services", 
+                  problems: ["Manual contract generation", "Disjointed intake forms", "Invoice chasing"] 
+                },
+                { 
+                  icon: Home, 
+                  title: "Real Estate", 
+                  problems: ["Cold lead nurturing", "Manual MLS scraping", "Dropped follow-ups"] 
+                }
+              ].map((industry, i) => (
+                <div key={i} className="glass-card p-8 flex flex-col gap-6 reveal-item hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20">
+                    <industry.icon className="w-6 h-6 text-accent" />
+                  </div>
+                  <h3 className="text-xl text-white font-semibold">{industry.title}</h3>
+                  <div className="flex flex-col gap-3 border-t border-white/5 pt-4">
+                    {industry.problems.map((problem, j) => (
+                      <div key={j} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-accent/70 mt-0.5 shrink-0" />
+                        <span className="text-body text-sm leading-tight">{problem}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ==========================================
+            8. WHY FLOWMATIC (COMPARISON)
+        ========================================== */}
+        <section className="w-full py-24 md:py-32 bg-black border-y border-white/5">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+            <div className="flex flex-col items-center text-center mb-16 reveal-item">
+              <span className="section-label mb-4">The Flowmatic Edge</span>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
+                Why businesses choose custom systems over DIY Zapier scripts.
+              </h2>
+            </div>
+            
+            <div className="w-full max-w-4xl mx-auto glass-panel overflow-hidden reveal-item">
+              <div className="grid grid-cols-3 bg-[#0A0A0A] p-6 border-b border-white/10">
+                <div className="text-body font-semibold uppercase tracking-wider text-sm">Feature</div>
+                <div className="text-white/50 font-semibold uppercase tracking-wider text-sm text-center">DIY / Freelancers</div>
+                <div className="text-accent font-semibold uppercase tracking-wider text-sm text-center flex items-center justify-center gap-2">
+                  <Star className="w-4 h-4 fill-accent" />
+                  Flowmatic
+                </div>
+              </div>
+              
+              <div className="flex flex-col">
+                {[
+                  { feature: "Strategic Approach", bad: "Band-aid fixes", good: "Full architecture audits" },
+                  { feature: "Workflows", bad: "Fragile & unscalable", good: "Stress-tested & resilient" },
+                  { feature: "Documentation", bad: "None", good: "Comprehensive logic maps" },
+                  { feature: "Team Training", bad: "Figure it out yourself", good: "Dedicated onboarding calls" },
+                  { feature: "Support", bad: "Ghosted after payment", good: "Ongoing SLA & maintenance" },
+                  { feature: "Business ROI", bad: "Unknown", good: "Guaranteed hours saved" }
+                ].map((row, i) => (
+                  <div key={i} className={`grid grid-cols-3 p-6 items-center ${i !== 5 ? 'border-b border-white/5' : ''} hover:bg-white/5 transition-colors`}>
+                    <div className="text-white font-medium">{row.feature}</div>
+                    <div className="flex items-center justify-center gap-2 text-white/50">
+                      <X className="w-4 h-4 text-red-500/50" />
+                      <span className="text-sm">{row.bad}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-white font-medium">
+                      <Check className="w-4 h-4 text-accent" />
+                      <span className="text-sm">{row.good}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==========================================
+            9. OUR PROCESS
+        ========================================== */}
+        <section className="w-full py-24 md:py-32 bg-[#050505]">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+            <div className="flex flex-col items-start mb-16 reveal-item">
+              <span className="section-label mb-4">Enterprise Implementation</span>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
+                From discovery to deployment.
+              </h2>
+            </div>
+            
+            <div className="relative flex flex-col md:flex-row justify-between gap-8 md:gap-4 reveal-item">
+              {/* SVG Connecting Line (Desktop) */}
+              <div className="hidden md:block absolute top-12 left-[5%] right-[5%] h-[2px] bg-white/10 z-0">
+                <div className="h-full bg-accent w-1/3 animate-pulse" />
+              </div>
+
+              {[
+                { step: "01", title: "Discovery", desc: "Deep dive into your operational bottlenecks." },
+                { step: "02", title: "Blueprint", desc: "Detailed logic maps and architecture design." },
+                { step: "03", title: "Development", desc: "Building the engine in a staging environment." },
+                { step: "04", title: "Deployment", desc: "Going live and onboarding your team." },
+                { step: "05", title: "Optimization", desc: "Ongoing monitoring and SLA maintenance." }
+              ].map((phase, i) => (
+                <div key={i} className="flex flex-col gap-4 relative z-10 bg-[#050505] p-2 md:w-1/5">
+                  <div className="w-24 h-24 rounded-full glass-card flex items-center justify-center text-3xl font-heading text-white border-accent/30 shadow-[0_0_30px_rgba(47,107,255,0.1)]">
+                    {phase.step}
+                  </div>
+                  <h3 className="text-xl text-white font-semibold mt-2">{phase.title}</h3>
+                  <p className="text-body text-sm leading-relaxed">{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ==========================================
+            10. FINAL POSITIONING
+        ========================================== */}
+        <section className="w-full py-32 bg-accent text-center relative overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: "url('/noise.png')", backgroundRepeat: "repeat" }} />
+          <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center gap-8 reveal-item">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter leading-tight">
+              We don&apos;t just sell automations.<br />
+              We build reliable business systems.
+            </h2>
+            <p className="text-xl text-white/90 max-w-2xl font-medium">
+              Eliminate repetitive operations. Reclaim hundreds of hours. Scale your business without scaling headcount.
+            </p>
+            <button onClick={scrollToContact} className="mt-8 px-10 py-5 bg-white text-accent font-bold tracking-wider uppercase text-sm rounded-none hover:bg-black hover:text-white transition-colors duration-300">
+              Transform Your Operations
+            </button>
           </div>
         </section>
 
