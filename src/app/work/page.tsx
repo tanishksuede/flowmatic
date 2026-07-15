@@ -40,7 +40,8 @@ export default function Work() {
         
         const getScrollAmount = () => {
           const scrollWidth = wrapper.scrollWidth;
-          return -(scrollWidth - window.innerWidth + 100);
+          // Add enough padding so the last card completely clears the right edge of the screen
+          return -(scrollWidth - window.innerWidth + 400);
         };
 
         const tween = gsap.to(wrapper, {
@@ -85,9 +86,9 @@ export default function Work() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {[
                 {
-                  industry: "B2B SaaS",
-                  problem: "Sales reps spent 15 hours/week manually enriching leads, resulting in delayed follow-ups and lost deals.",
-                  solution: "Deployed an n8n webhook that catches new signups, triggers OpenAI to summarize the prospect's company website, and pushes structured data to HubSpot & Slack instantly.",
+                  industry: "Lead Gen Agency",
+                  problem: "Account executives spent 15 hours/week manually enriching prospect lists, resulting in delayed follow-ups and lost deals.",
+                  solution: "Deployed an n8n webhook that catches new Apollo prospects, triggers OpenAI to summarize the prospect's recent company news, and pushes personalized icebreakers to HubSpot & Slack instantly.",
                   outcome: "35% Increase in Meeting Bookings",
                   time: "15 Hours Saved / Week",
                   tools: ["n8n", "OpenAI", "HubSpot", "Slack"]
@@ -167,7 +168,7 @@ export default function Work() {
                   <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold">SC</div>
                   <div className="flex flex-col">
                     <span className="text-white font-semibold">Sarah Chen</span>
-                    <span className="text-body text-sm">VP Operations, Nexus SaaS</span>
+                    <span className="text-body text-sm">VP Operations, Nexus Growth Agency</span>
                   </div>
                 </div>
               </div>

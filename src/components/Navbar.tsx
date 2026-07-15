@@ -44,9 +44,6 @@ export default function Navbar() {
           <Link href="/work" className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive">
             Work
           </Link>
-          <Link href="/about" className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive">
-            About
-          </Link>
           <button
             onClick={() => window.location.href = "mailto:hello@flowmatic.io"}
             className="text-[13px] font-bold text-text-base uppercase tracking-widest hover:text-accent transition-colors interactive"

@@ -76,7 +76,7 @@ export default function Home() {
               </h1>
               
               <p className="text-lg md:text-xl text-body max-w-[560px] mb-10 leading-relaxed">
-                We design and deploy AI-powered workflows that eliminate reporting, lead follow-ups, client onboarding, data entry, and repetitive operations for marketing agencies and growing businesses.
+                We design and deploy AI-powered workflows that eliminate reporting, lead follow-ups, client onboarding, data entry, and repetitive operations specifically for marketing agencies.
               </p>
 
               <div className="flex flex-col gap-4 mb-10">
@@ -266,28 +266,28 @@ export default function Home() {
               {[
                 { 
                   icon: TrendingUp, 
-                  title: "Marketing Agencies", 
-                  problems: ["Manual client reporting", "Delayed lead routing", "Repetitive onboarding"] 
+                  title: "Paid Media Agencies", 
+                  problems: ["Manual ROAS reporting", "Delayed lead routing", "Repetitive ad account setups"] 
                 },
                 { 
                   icon: Laptop, 
-                  title: "SaaS Companies", 
-                  problems: ["Incomplete user data", "Churn prediction delays", "Support ticket routing"] 
+                  title: "SEO Agencies", 
+                  problems: ["Incomplete keyword tracking", "Manual backlink outreach", "Disjointed rank reporting"] 
                 },
                 { 
                   icon: Briefcase, 
-                  title: "Professional Services", 
-                  problems: ["Manual contract generation", "Disjointed intake forms", "Invoice chasing"] 
+                  title: "Lead Gen Agencies", 
+                  problems: ["Manual lead enrichment", "Disjointed cold outreach", "Dropped follow-ups"] 
                 },
                 { 
                   icon: HomeIcon, 
-                  title: "Real Estate", 
-                  problems: ["Cold lead nurturing", "Manual MLS scraping", "Dropped follow-ups"] 
+                  title: "Creative Agencies", 
+                  problems: ["Asset approval delays", "Manual invoice chasing", "Messy client onboarding"] 
                 }
               ].map((industry, i) => (
                 <div key={i} className="glass-card p-8 flex flex-col gap-6 reveal-item hover:-translate-y-2 transition-transform duration-300">
                   <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20">
-                    <industry.icon className="w-6 h-6 text-accent" />
+                     <industry.icon className="w-6 h-6 text-accent" />
                   </div>
                   <h3 className="text-xl text-white font-semibold">{industry.title}</h3>
                   <div className="flex flex-col gap-3 border-t border-white/5 pt-4">
