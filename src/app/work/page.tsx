@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Quote } from "lucide-react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CASE_STUDIES } from "../../data/caseStudies";
@@ -195,25 +196,14 @@ export default function Work() {
                 </div>
                 
                 <div>
-                  <h3 className="text-2xl md:text-4xl text-white font-semibold leading-tight tracking-tight mb-4 group-hover:text-accent transition-colors duration-300">
-                    {cs.t}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {cs.tools.map((tool, j) => (
-                      <span key={j} className="text-xs font-medium text-body bg-white/5 border border-white/10 px-2 py-1 rounded-md">{tool}</span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4 pt-8 border-t border-white/10">
-                  <div className="flex flex-col">
-                    <span className="text-body text-xs uppercase tracking-wider mb-2">Metrics</span>
-                    <span className="text-white font-semibold">{cs.stat}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-body text-xs uppercase tracking-wider mb-2">Deliverable</span>
-                    <span className="text-white/80 text-sm">{cs.metric}</span>
-                  </div>
+                  <h3 className="text-[50px] leading-none mb-6 group-hover:text-accent transition-colors duration-300">{cs.res}</h3>
+                  <p className="text-body mb-8 text-lg">{cs.title}</p>
+                  <Link 
+                    href={`/blueprint/${i}`}
+                    className="uppercase font-bold tracking-widest text-sm border-b border-text-base pb-1 interactive hover:text-accent transition-colors duration-300 w-fit"
+                  >
+                    View Architecture
+                  </Link>
                 </div>
               </div>
             ))}
