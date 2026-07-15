@@ -1,9 +1,8 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Footer() {
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <footer className="w-full bg-bg-base border-t border-muted pt-32 pb-12 px-6 md:px-10">
@@ -30,10 +29,9 @@ export default function Footer() {
           {/* Column 2 */}
           <div className="flex flex-col gap-4">
             <span className="section-label text-text-base mb-4">SITEMAP</span>
-            <button onClick={() => scrollToSection('work')} className="text-body hover:text-accent transition-colors w-fit interactive text-left">Work</button>
-            <button onClick={() => scrollToSection('services')} className="text-body hover:text-accent transition-colors w-fit interactive text-left">Services</button>
-            <button onClick={() => scrollToSection('about')} className="text-body hover:text-accent transition-colors w-fit interactive text-left">About</button>
-            <button onClick={() => scrollToSection('contact')} className="text-body hover:text-accent transition-colors w-fit interactive text-left">Contact</button>
+            <Link href="/" className="text-body hover:text-accent transition-colors w-fit interactive text-left">Home</Link>
+            <Link href="/work" className="text-body hover:text-accent transition-colors w-fit interactive text-left">Work</Link>
+            <button onClick={() => window.location.href = "mailto:hello@flowmatic.io"} className="text-body hover:text-accent transition-colors w-fit interactive text-left">Contact</button>
           </div>
 
           {/* Column 3 */}
