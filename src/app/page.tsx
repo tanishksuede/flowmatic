@@ -400,62 +400,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ==========================================
-            8. ABOUT US
-        ========================================== */}
-        <section id="about" className="w-full py-[120px] md:py-[180px] px-6 md:px-10 bg-[#0A0A0A] overflow-hidden border-t border-muted relative">
-          <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-0 relative">
-            
-            {/* Left Column */}
-            <div className="lg:w-1/3 md:pr-10 lg:pr-24 mb-12 lg:mb-0">
-              <div className="lg:sticky top-1/3 overflow-hidden py-4">
-                <h2 className="about-title text-[50px] md:text-[80px] text-hollow leading-none origin-bottom-left">
-                  WHO WE <br /> ARE
-                </h2>
-              </div>
-            </div>
-            
-            {/* Center Timeline Track (Desktop Only) */}
-            <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-[1px] bg-muted transform -translate-x-1/2 z-0">
-              <div className="about-pointer absolute left-1/2 transform -translate-x-1/2 w-[3px] h-32 bg-accent shadow-[0_0_20px_#2563EB] z-10" />
-            </div>
 
-            {/* Right Column */}
-            <div className="lg:w-2/3 flex flex-col relative border-t lg:border-t-0 border-muted pl-0 lg:pl-16">
-              {[
-                { 
-                  num: "SYS.01",
-                  title: "Engineered for Scale", 
-                  desc: "Flowmatic is a technical, builder-first automation agency based out of Indore, India. We don't sell generic advice, empty consulting hours, or fluffy marketing strategies." 
-                },
-                { 
-                  num: "SYS.02",
-                  title: "Our Philosophy", 
-                  desc: "We are engineers, system architects, and growth strategists. Our team focuses strictly on what works: deploying raw, uncompromised automation that directly impacts your bottom line. We learn by doing, and we only deploy battle-tested pipelines." 
-                },
-                { 
-                  num: "SYS.03",
-                  title: "Why We Do This", 
-                  desc: "We noticed agency owners losing countless hours to manual reporting, slow lead follow-ups, and tedious onboarding data entry. We engineer systems to eliminate those bottlenecks entirely, so you can stop doing administrative work and focus purely on closing deals." 
-                }
-              ].map((item, i) => (
-                <div key={i} className="about-text group flex flex-col md:flex-row gap-8 lg:gap-16 opacity-0 py-16 border-b border-muted transition-colors duration-500 relative overflow-hidden cursor-pointer">
-                  {/* Hover Background Sweep */}
-                  <div className="absolute left-0 top-0 w-0 h-full bg-[#0f0f0f] group-hover:w-[120%] -translate-x-[10%] transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] z-0" />
-                  
-                  <span className="font-heading text-xl text-accent w-24 shrink-0 transform group-hover:translate-x-4 transition-transform duration-500 ease-out z-10">{item.num}</span>
-                  
-                  <div className="flex flex-col gap-6 z-10">
-                    <h3 className="text-3xl lg:text-4xl font-black text-text-base tracking-tight uppercase transform group-hover:translate-x-4 transition-transform duration-500 delay-75 ease-out">{item.title}</h3>
-                    <p className="text-body text-lg leading-relaxed max-w-2xl transform group-hover:translate-x-4 transition-transform duration-500 delay-150 ease-out">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ==========================================
             9. CTA SECTION
