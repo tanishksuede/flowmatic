@@ -20,8 +20,8 @@ export default async function BlueprintPage({ params }: { params: Promise<{ id: 
         <Link href="/" className="font-heading text-xl font-black uppercase tracking-tighter hover:text-accent transition-colors">
           FLOWMATIC
         </Link>
-        <Link href="/#work" className="text-body hover:text-accent font-bold uppercase tracking-widest text-sm transition-colors">
-          [ BACK TO HOME ]
+        <Link href="/work#work" className="text-body hover:text-accent font-bold uppercase tracking-widest text-sm transition-colors">
+          [ BACK TO WORK ]
         </Link>
       </nav>
 
